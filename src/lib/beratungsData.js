@@ -119,84 +119,84 @@ export const EINWAENDE = [
     id: "e1",
     einwand: "Das ist mir zu teuer",
     kategorie: "Preis",
-    emoji: "💰",
+    emoji: "\uD83D\uDCB0",
     behandlung: [
-      "Verständnis zeigen: „Ich verstehe, dass der Preis wichtig ist."",
-      "Herunterbrechen: „Das sind nur X€ pro Tag – weniger als ein Kaffee."",
-      "Gegenrechnung: „Was würde es kosten, KEINE Absicherung zu haben?"",
-      "Alternative: „Wir können den Schutz anpassen, damit er ins Budget passt.""
+      "Verständnis zeigen: 'Ich verstehe, dass der Preis wichtig ist.'",
+      "Herunterbrechen: 'Das sind nur X\u20AC pro Tag - weniger als ein Kaffee.'",
+      "Gegenrechnung: 'Was würde es kosten, KEINE Absicherung zu haben?'",
+      "Alternative: 'Wir können den Schutz anpassen, damit er ins Budget passt.'"
     ]
   },
   {
     id: "e2",
     einwand: "Ich muss noch darüber nachdenken",
     kategorie: "Aufschieben",
-    emoji: "🤔",
+    emoji: "\uD83E\uDD14",
     behandlung: [
-      "Wertschätzung: „Das ist verständlich, es ist eine wichtige Entscheidung."",
-      "Konkretisieren: „Was genau möchten Sie noch bedenken?"",
-      "Dringlichkeit: „Ihr Gesundheitszustand ist jetzt optimal – das kann sich ändern."",
-      "Verbindlichkeit: „Soll ich Ihnen die Unterlagen mitgeben? Wann sprechen wir uns wieder?""
+      "Wertschätzung: 'Das ist verständlich, es ist eine wichtige Entscheidung.'",
+      "Konkretisieren: 'Was genau möchten Sie noch bedenken?'",
+      "Dringlichkeit: 'Ihr Gesundheitszustand ist jetzt optimal - das kann sich ändern.'",
+      "Verbindlichkeit: 'Soll ich Ihnen die Unterlagen mitgeben? Wann sprechen wir uns wieder?'"
     ]
   },
   {
     id: "e3",
     einwand: "Ich habe schon einen Berater",
     kategorie: "Wettbewerb",
-    emoji: "🤝",
+    emoji: "\uD83E\uDD1D",
     behandlung: [
-      "Respekt: „Super, dass Sie bereits beraten werden."",
-      "Mehrwert: „Eine Zweitmeinung kann nie schaden – kostenlos und unverbindlich."",
-      "Check: „Wann wurde Ihr Schutz zuletzt überprüft?"",
-      "Vergleich: „Oft gibt es Einsparpotential bei gleichem oder besserem Schutz.""
+      "Respekt: 'Super, dass Sie bereits beraten werden.'",
+      "Mehrwert: 'Eine Zweitmeinung kann nie schaden - kostenlos und unverbindlich.'",
+      "Check: 'Wann wurde Ihr Schutz zuletzt überprüft?'",
+      "Vergleich: 'Oft gibt es Einsparpotential bei gleichem oder besserem Schutz.'"
     ]
   },
   {
     id: "e4",
     einwand: "Das brauche ich nicht",
     kategorie: "Kein Bedarf",
-    emoji: "🚫",
+    emoji: "\uD83D\uDEAB",
     behandlung: [
-      "Nachfragen: „Was genau meinen Sie – den Schutz allgemein oder dieses Produkt?"",
-      "Szenario: „Stellen Sie sich vor, morgen passiert X – wer zahlt dann?"",
-      "Statistik: „Jeder 4. wird berufsunfähig – das Risiko ist real."",
-      "Emotion: „Es geht um die Absicherung Ihrer Familie.""
+      "Nachfragen: 'Was genau meinen Sie - den Schutz allgemein oder dieses Produkt?'",
+      "Szenario: 'Stellen Sie sich vor, morgen passiert X - wer zahlt dann?'",
+      "Statistik: 'Jeder 4. wird berufsunfähig - das Risiko ist real.'",
+      "Emotion: 'Es geht um die Absicherung Ihrer Familie.'"
     ]
   },
   {
     id: "e5",
     einwand: "Versicherungen zahlen sowieso nicht",
     kategorie: "Misstrauen",
-    emoji: "😤",
+    emoji: "\uD83D\uDE24",
     behandlung: [
-      "Verstehen: „Das höre ich öfter – und manchmal stimmt es leider auch."",
-      "Aufklärung: „Deswegen ist die richtige Produktwahl so wichtig."",
-      "Qualität: „Ich arbeite nur mit Gesellschaften, die eine hohe Leistungsquote haben."",
-      "Beispiele: „Die Leistungsquote bei BU liegt bei über 75% – mit guter Beratung noch höher.""
+      "Verstehen: 'Das höre ich öfter - und manchmal stimmt es leider auch.'",
+      "Aufklärung: 'Deswegen ist die richtige Produktwahl so wichtig.'",
+      "Qualität: 'Ich arbeite nur mit Gesellschaften, die eine hohe Leistungsquote haben.'",
+      "Beispiele: 'Die Leistungsquote bei BU liegt bei über 75% - mit guter Beratung noch höher.'"
     ]
   },
   {
     id: "e6",
     einwand: "Mein Partner muss mitentscheiden",
     kategorie: "Dritte",
-    emoji: "👫",
+    emoji: "\uD83D\uDC6B",
     behandlung: [
-      "Verständnis: „Absolut, so eine Entscheidung trifft man gemeinsam."",
-      "Zusammenfassen: „Soll ich Ihnen die wichtigsten Punkte zusammenfassen?"",
-      "Einladen: „Gerne lade ich Ihren Partner zum nächsten Termin ein."",
-      "Festhalten: „Halten wir fest, was Ihnen gefallen hat – das hilft beim Gespräch.""
+      "Verständnis: 'Absolut, so eine Entscheidung trifft man gemeinsam.'",
+      "Zusammenfassen: 'Soll ich Ihnen die wichtigsten Punkte zusammenfassen?'",
+      "Einladen: 'Gerne lade ich Ihren Partner zum nächsten Termin ein.'",
+      "Festhalten: 'Halten wir fest, was Ihnen gefallen hat - das hilft beim Gespräch.'"
     ]
   },
   {
     id: "e7",
     einwand: "Ich bin noch jung, das hat Zeit",
     kategorie: "Alter",
-    emoji: "⏰",
+    emoji: "\u23F0",
     behandlung: [
-      "Bestätigen: „Genau deswegen ist JETZT der beste Zeitpunkt!"",
-      "Preis: „Je jünger, desto günstiger – der Beitrag steigt mit jedem Jahr."",
-      "Gesundheit: „Jetzt sind Sie gesund – eine Vorerkrankung kann alles ändern."",
-      "Zinseszins: „Bei der Altersvorsorge zählt jedes Jahr – der Zinseszinseffekt ist enorm.""
+      "Bestätigen: 'Genau deswegen ist JETZT der beste Zeitpunkt!'",
+      "Preis: 'Je jünger, desto günstiger - der Beitrag steigt mit jedem Jahr.'",
+      "Gesundheit: 'Jetzt sind Sie gesund - eine Vorerkrankung kann alles ändern.'",
+      "Zinseszins: 'Bei der Altersvorsorge zählt jedes Jahr - der Zinseszinseffekt ist enorm.'"
     ]
   }
 ];
