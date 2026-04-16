@@ -1,0 +1,50 @@
+{
+  "name": "Beratung",
+  "type": "object",
+  "properties": {
+    "kunde_name": {
+      "type": "string",
+      "description": "Name des Kunden"
+    },
+    "datum": {
+      "type": "string",
+      "format": "date",
+      "description": "Datum der Beratung"
+    },
+    "aktuelle_phase": {
+      "type": "number",
+      "default": 0,
+      "description": "Aktuelle Phase im Gespr\u00e4chsleitfaden (0-basiert)"
+    },
+    "abgeschlossene_fragen": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "IDs der abgehakten Pflichtfragen"
+    },
+    "notizen": {
+      "type": "string",
+      "default": "",
+      "description": "Freitext-Notizen zur Beratung"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "aktiv",
+        "abgeschlossen",
+        "abgebrochen"
+      ],
+      "default": "aktiv"
+    },
+    "upl_synced": {
+      "type": "boolean",
+      "default": false,
+      "description": "Ob die Daten an UPL \u00fcbertragen wurden"
+    }
+  },
+  "required": [
+    "kunde_name"
+  ]
+}
