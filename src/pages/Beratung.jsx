@@ -46,12 +46,13 @@ export default function Beratung() {
     },
   });
 
-  const handleStart = (kundeName, existingId) => {
+  const handleStart = (kundeName, existingId, uplKontaktId) => {
     if (existingId) {
       setActiveBeratungId(existingId);
     } else {
       createMutation.mutate({
         kunde_name: kundeName,
+        upl_kontakt_id: uplKontaktId || null,
         datum: new Date().toISOString().split("T")[0],
         aktuelle_phase: 0,
         abgeschlossene_fragen: [],

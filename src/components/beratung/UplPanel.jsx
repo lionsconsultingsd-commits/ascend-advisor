@@ -1,31 +1,25 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Upload, Check, AlertCircle, ArrowRight, Settings } from "lucide-react";
+import { Upload, Check, AlertCircle, Settings, User } from "lucide-react";
+import { base44 } from "@/api/base44Client";
 
 export default function UplPanel({ beratung, onSyncStatusChange }) {
   const [syncing, setSyncing] = useState(false);
   const [syncResult, setSyncResult] = useState(null);
 
+  const hasUplKontakt = !!beratung?.upl_kontakt_id;
+
   const handleSync = async () => {
     setSyncing(true);
     setSyncResult(null);
 
-    // Placeholder for UPL API integration
-    // Replace this with actual API call when UPL endpoint is available
     try {
-      // Simulated API call structure:
-      // const response = await base44.functions.invoke('uplSync', {
-      //   kunde_name: beratung.kunde_name,
-      //   datum: beratung.datum,
-      //   notizen: beratung.notizen,
-      //   abgeschlossene_fragen: beratung.abgeschlossene_fragen,
-      //   aktuelle_phase: beratung.aktuelle_phase,
-      //   status: beratung.status
-      // });
-
-      // Simulated delay
-      await new Promise((r) => setTimeout(r, 1500));
+      await base44.functions.invoke("uplUpdateKontakt", {
+        kontakt_id: beratung.upl_kontakt_id,
+        notizen: beratung.notizen || "",
+        pipeline_status: ["beratung_abgeschlossen"],
+      });
 
       setSyncResult("success");
       onSyncStatusChange(true);
@@ -39,28 +33,37 @@ export default function UplPanel({ beratung, onSyncStatusChange }) {
   return (
     <div className="flex-1 overflow-y-auto px-4 pb-4">
       <p className="text-sm text-muted-foreground mb-4">
-        Übertrage die Beratungsdaten an das UPL-System deines Kollegen.
+        Übertrage die Beratungsnotizen zurück an den UPL-Kontakt.
       </p>
 
-      {/* Connection status */}
+      {/* Kontakt-Status */}
       <Card className="p-5 rounded-2xl mb-4">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-            <Settings className="w-5 h-5 text-primary" />
+          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${hasUplKontakt ? "bg-accent/10" : "bg-secondary"}`}>
+            {hasUplKontakt ? (
+              <User className="w-5 h-5 text-accent" />
+            ) : (
+              <Settings className="w-5 h-5 text-muted-foreground" />
+            )}
           </div>
           <div>
-            <p className="font-semibold text-sm">UPL API Schnittstelle</p>
+            <p className="font-semibold text-sm">
+              {hasUplKontakt ? "UPL-Kontakt verknüpft" : "Kein UPL-Kontakt"}
+            </p>
             <p className="text-xs text-muted-foreground">
-              Bereit zur Konfiguration
+              {hasUplKontakt
+                ? beratung.kunde_name
+                : "Beratung wurde manuell gestartet"}
             </p>
           </div>
         </div>
 
-        <div className="bg-secondary/50 rounded-xl p-3 text-xs text-muted-foreground space-y-1">
-          <p>• Endpoint wird von deinem Kollegen bereitgestellt</p>
-          <p>• Beratungsdaten werden als JSON übertragen</p>
-          <p>• Notizen, Pflichtfragen & Kundendaten werden synchronisiert</p>
-        </div>
+        {hasUplKontakt && (
+          <div className="bg-secondary/50 rounded-xl p-3 text-xs text-muted-foreground space-y-1">
+            <p>• Notizen werden im Kontakt gespeichert</p>
+            <p>• Pipeline-Status wird auf "Beratung abgeschlossen" gesetzt</p>
+          </div>
+        )}
       </Card>
 
       {/* Data preview */}
@@ -85,7 +88,7 @@ export default function UplPanel({ beratung, onSyncStatusChange }) {
       {/* Sync button */}
       <Button
         onClick={handleSync}
-        disabled={syncing}
+        disabled={syncing || !hasUplKontakt}
         className="w-full h-12 rounded-xl text-base"
       >
         {syncing ? (
@@ -106,17 +109,23 @@ export default function UplPanel({ beratung, onSyncStatusChange }) {
         )}
       </Button>
 
+      {!hasUplKontakt && (
+        <p className="mt-3 text-xs text-center text-muted-foreground">
+          Nur verfügbar wenn ein UPL-Kontakt verknüpft ist.
+        </p>
+      )}
+
       {syncResult === "error" && (
         <div className="mt-3 flex items-center gap-2 text-destructive text-xs p-3 bg-destructive/10 rounded-xl">
           <AlertCircle className="w-4 h-4 shrink-0" />
-          <span>Übertragung fehlgeschlagen. Bitte API-Konfiguration prüfen.</span>
+          <span>Übertragung fehlgeschlagen. Bitte erneut versuchen.</span>
         </div>
       )}
 
       {syncResult === "success" && (
         <div className="mt-3 flex items-center gap-2 text-accent text-xs p-3 bg-accent/10 rounded-xl">
           <Check className="w-4 h-4 shrink-0" />
-          <span>Daten wurden erfolgreich an UPL übermittelt.</span>
+          <span>Notizen wurden erfolgreich an UPL übermittelt.</span>
         </div>
       )}
     </div>

@@ -6,6 +6,10 @@
       "type": "string",
       "description": "Name des Kunden"
     },
+    "upl_kontakt_id": {
+      "type": "string",
+      "description": "ID des Kontakts in der UPL-App"
+    },
     "datum": {
       "type": "string",
       "format": "date",
