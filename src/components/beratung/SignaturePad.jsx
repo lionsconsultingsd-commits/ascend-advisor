@@ -14,7 +14,8 @@ export default function SignaturePad({ onSigned, existingUrl }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    ctx.strokeStyle = "#1a1a2e";
+    const fg = getComputedStyle(document.documentElement).getPropertyValue("--foreground").trim();
+    ctx.strokeStyle = `hsl(${fg})`;
     ctx.lineWidth = 2.5;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
@@ -101,7 +102,7 @@ export default function SignaturePad({ onSigned, existingUrl }) {
           ref={canvasRef}
           width={340}
           height={160}
-          className="w-full rounded-xl bg-white touch-none cursor-crosshair"
+          className="w-full rounded-xl bg-card touch-none cursor-crosshair"
           onMouseDown={handleStart}
           onMouseMove={handleMove}
           onMouseUp={handleEnd}
