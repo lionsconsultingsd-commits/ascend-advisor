@@ -3,6 +3,7 @@ import { Mic, Monitor } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ProtocolGenerator from "./ProtocolGenerator";
 import LiveAufnahme from "./LiveAufnahme";
+import PdfDownloadButton from "@/components/beratung/PdfDownloadButton";
 
 const TABS = [
   { id: "mikrofon", label: "Mikrofon", icon: Mic },
@@ -36,6 +37,13 @@ export default function ProtokollTabs({ beratung, onProtocolGenerated }) {
           );
         })}
       </div>
+
+      {/* PDF Download – immer sichtbar wenn Protokoll vorhanden */}
+      {beratung?.protokoll_text && (
+        <div className="px-4 pb-2">
+          <PdfDownloadButton beratung={beratung} />
+        </div>
+      )}
 
       {/* Content */}
       {activeTab === "mikrofon" && (
