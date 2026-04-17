@@ -9,6 +9,8 @@ import UplPanel from "@/components/beratung/UplPanel";
 import BottomNav from "@/components/beratung/BottomNav";
 import StartDialog from "@/components/beratung/StartDialog";
 import ProtocolGenerator from "@/components/beratung/ProtocolGenerator";
+import LiveAufnahme from "@/components/beratung/LiveAufnahme";
+import ProtokollTabs from "@/components/beratung/ProtokollTabs";
 import SignaturePad from "@/components/beratung/SignaturePad";
 import { X, MoreVertical, CheckCircle } from "lucide-react";
 import {
@@ -185,7 +187,7 @@ export default function Beratung() {
           />
         )}
         {activeTab === "protokoll" && (
-          <ProtocolGenerator
+          <ProtokollTabs
             beratung={activeBeratung}
             onProtocolGenerated={(text) =>
               handleUpdate({
