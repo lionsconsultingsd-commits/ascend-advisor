@@ -121,10 +121,10 @@ export const EINWAENDE = [
     kategorie: "Preis",
     emoji: "💰",
     behandlung: [
-      "„Ich verstehe Sie vollkommen – Preis ist ein wichtiger Faktor. Darf ich Ihnen kurz zeigen, was dahintersteckt?"",
-      "„Wenn wir den Beitrag auf den Tag herunterrechnen, sind das gerade mal [X] € – das ist weniger als ein Kaffee am Morgen."",
-      "„Stellen Sie sich kurz vor: Was würde es Sie kosten, wenn Sie morgen nicht mehr arbeiten könnten und keine Absicherung hätten?"",
-      "„Wir können den Schutz auch anpassen – welcher Betrag wäre für Sie monatlich angenehm?""
+      'Ich verstehe Sie vollkommen – Preis ist ein wichtiger Faktor. Darf ich Ihnen kurz zeigen, was dahintersteckt?',
+      'Wenn wir den Beitrag auf den Tag herunterrechnen, sind das gerade mal [X] € – das ist weniger als ein Kaffee am Morgen.',
+      'Stellen Sie sich kurz vor: Was würde es Sie kosten, wenn Sie morgen nicht mehr arbeiten könnten und keine Absicherung hätten?',
+      'Wir können den Schutz auch anpassen – welcher Betrag wäre für Sie monatlich angenehm?',
     ]
   },
   {
@@ -133,10 +133,10 @@ export const EINWAENDE = [
     kategorie: "Aufschieben",
     emoji: "🤔",
     behandlung: [
-      "„Das ist absolut verständlich – es ist eine wichtige Entscheidung. Was genau möchten Sie noch bedenken? Vielleicht kann ich Ihnen dabei helfen."",
-      "„Gibt es etwas, das Ihnen noch nicht ganz klar ist, oder einen Punkt, bei dem Sie sich unsicher fühlen?"",
-      "„Ich möchte Sie nur darauf hinweisen: Ihr Gesundheitszustand ist heute optimal. Das kann sich jederzeit ändern – und dann wird eine Absicherung deutlich teurer oder sogar unmöglich."",
-      "„Wann in etwa würden Sie sich eine Entscheidung vorstellen? Soll ich Ihnen die Unterlagen mitgeben und wir telefonieren in drei Tagen kurz nach?""
+      'Das ist absolut verständlich – es ist eine wichtige Entscheidung. Was genau möchten Sie noch bedenken? Vielleicht kann ich Ihnen dabei helfen.',
+      'Gibt es etwas, das Ihnen noch nicht ganz klar ist, oder einen Punkt, bei dem Sie sich unsicher fühlen?',
+      'Ich möchte Sie nur darauf hinweisen: Ihr Gesundheitszustand ist heute optimal. Das kann sich jederzeit ändern – und dann wird eine Absicherung deutlich teurer oder sogar unmöglich.',
+      'Wann in etwa würden Sie sich eine Entscheidung vorstellen? Soll ich Ihnen die Unterlagen mitgeben und wir telefonieren in drei Tagen kurz nach?',
     ]
   },
   {
@@ -145,10 +145,10 @@ export const EINWAENDE = [
     kategorie: "Wettbewerb",
     emoji: "🤝",
     behandlung: [
-      "„Das ist sehr gut – zeigt, dass Sie das Thema ernst nehmen. Darf ich fragen, wann Sie zuletzt eine unabhängige Überprüfung hatten?"",
-      "„Eine Zweitmeinung kostet Sie nichts und verpflichtet zu nichts. Viele meiner Kunden haben durch einen kurzen Vergleich bares Geld gespart."",
-      "„Gerade weil ich als unabhängiger Makler tätig bin, kann ich Angebote von über 200 Gesellschaften vergleichen – das kann kaum ein gebundener Vertreter."",
-      "„Wenn Sie am Ende sagen: ‚Mein bisheriger Schutz ist top' – perfekt. Aber falls wir etwas Besseres finden, wäre das doch gut zu wissen, oder?""
+      'Das ist sehr gut – zeigt, dass Sie das Thema ernst nehmen. Darf ich fragen, wann Sie zuletzt eine unabhängige Überprüfung hatten?',
+      'Eine Zweitmeinung kostet Sie nichts und verpflichtet zu nichts. Viele meiner Kunden haben durch einen kurzen Vergleich bares Geld gespart.',
+      'Gerade weil ich als unabhängiger Makler tätig bin, kann ich Angebote von über 200 Gesellschaften vergleichen – das kann kaum ein gebundener Vertreter.',
+      'Wenn Sie am Ende sagen: Mein bisheriger Schutz ist top – perfekt. Aber falls wir etwas Besseres finden, wäre das doch gut zu wissen, oder?',
     ]
   },
   {
@@ -157,10 +157,10 @@ export const EINWAENDE = [
     kategorie: "Kein Bedarf",
     emoji: "🚫",
     behandlung: [
-      "„Ich höre Sie – darf ich kurz nachfragen: Meinen Sie, dass Sie grundsätzlich gut abgesichert sind, oder dass dieses spezifische Produkt nicht zu Ihnen passt?"",
-      "„Stellen Sie sich vor: Sie werden morgen krank und können sechs Monate nicht arbeiten. Wie würden Sie in dieser Zeit Ihre Miete, Ihren Kredit, Ihren Lebensunterhalt finanzieren?"",
-      "„Statistisch wird jeder vierte Arbeitnehmer in Deutschland mindestens einmal in seinem Leben berufsunfähig – das ist keine Seltenheit, das ist Realität."",
-      "„Es geht letztlich nicht um mich oder eine Versicherung – es geht darum, dass Ihre Familie und Sie im Ernstfall abgesichert sind. Das ist Ihre Entscheidung, und ich respektiere sie.""
+      'Ich höre Sie – darf ich kurz nachfragen: Meinen Sie, dass Sie grundsätzlich gut abgesichert sind, oder dass dieses spezifische Produkt nicht zu Ihnen passt?',
+      'Stellen Sie sich vor: Sie werden morgen krank und können sechs Monate nicht arbeiten. Wie würden Sie in dieser Zeit Ihre Miete, Ihren Kredit, Ihren Lebensunterhalt finanzieren?',
+      'Statistisch wird jeder vierte Arbeitnehmer in Deutschland mindestens einmal in seinem Leben berufsunfähig – das ist keine Seltenheit, das ist Realität.',
+      'Es geht letztlich nicht um mich oder eine Versicherung – es geht darum, dass Ihre Familie und Sie im Ernstfall abgesichert sind. Das ist Ihre Entscheidung, und ich respektiere sie.',
     ]
   },
   {
@@ -169,10 +169,10 @@ export const EINWAENDE = [
     kategorie: "Misstrauen",
     emoji: "😤",
     behandlung: [
-      "„Das höre ich öfter – und ich verstehe, warum viele das denken. Leider gibt es schwarze Schafe in der Branche. Genau deswegen ist die Wahl des richtigen Produkts und Anbieters so entscheidend."",
-      "„Ich arbeite ausschließlich mit Gesellschaften, die nachweislich hohe Leistungsquoten haben. Die kann ich Ihnen schwarz auf weiß zeigen."",
-      "„Bei Berufsunfähigkeitsversicherungen beispielsweise liegt die Leistungsquote bei seriösen Anbietern über 80 %. Das bedeutet: In 8 von 10 Fällen wird gezahlt."",
-      "„Meine Aufgabe ist es, den Antrag von Anfang an so sauber zu stellen, dass es im Leistungsfall keine Diskussion gibt. Dafür bin ich dann auch Ihr Ansprechpartner – nicht nur beim Abschluss.""
+      'Das höre ich öfter – und ich verstehe, warum viele das denken. Leider gibt es schwarze Schafe in der Branche. Genau deswegen ist die Wahl des richtigen Produkts und Anbieters so entscheidend.',
+      'Ich arbeite ausschließlich mit Gesellschaften, die nachweislich hohe Leistungsquoten haben. Die kann ich Ihnen schwarz auf weiß zeigen.',
+      'Bei Berufsunfähigkeitsversicherungen beispielsweise liegt die Leistungsquote bei seriösen Anbietern über 80 %. Das bedeutet: In 8 von 10 Fällen wird gezahlt.',
+      'Meine Aufgabe ist es, den Antrag von Anfang an so sauber zu stellen, dass es im Leistungsfall keine Diskussion gibt. Dafür bin ich dann auch Ihr Ansprechpartner – nicht nur beim Abschluss.',
     ]
   },
   {
@@ -181,10 +181,10 @@ export const EINWAENDE = [
     kategorie: "Dritte",
     emoji: "👫",
     behandlung: [
-      "„Das ist absolut richtig und zeigt, dass Sie als Team entscheiden – das finde ich sehr gut."",
-      "„Soll ich Ihnen eine kurze Zusammenfassung mitgeben, die Sie Ihrem Partner zeigen können? So hat er oder sie alle wichtigen Punkte auf einen Blick."",
-      "„Noch besser: Wie wäre es, wenn wir einen gemeinsamen Termin machen – gerne auch kurz per Video? So kann Ihr Partner direkt Fragen stellen."",
-      "„Was hat Ihnen persönlich heute am besten gefallen? Das können wir als Ausgangspunkt für das Gespräch mit Ihrem Partner nehmen.""
+      'Das ist absolut richtig und zeigt, dass Sie als Team entscheiden – das finde ich sehr gut.',
+      'Soll ich Ihnen eine kurze Zusammenfassung mitgeben, die Sie Ihrem Partner zeigen können? So hat er oder sie alle wichtigen Punkte auf einen Blick.',
+      'Noch besser: Wie wäre es, wenn wir einen gemeinsamen Termin machen – gerne auch kurz per Video? So kann Ihr Partner direkt Fragen stellen.',
+      'Was hat Ihnen persönlich heute am besten gefallen? Das können wir als Ausgangspunkt für das Gespräch mit Ihrem Partner nehmen.',
     ]
   },
   {
@@ -193,10 +193,10 @@ export const EINWAENDE = [
     kategorie: "Alter",
     emoji: "⏰",
     behandlung: [
-      "„Genau das ist der Punkt – Sie sind jung! Und das ist der beste Vorteil, den Sie gerade haben. Nutzen wir ihn."",
-      "„Je früher Sie einsteigen, desto günstiger ist Ihr Beitrag. Mit jedem Jahr, das vergeht, zahlen Sie mehr – manchmal 10–15 % mehr pro Jahr."",
-      "„Und Ihre Gesundheit ist heute wahrscheinlich besser als in zehn Jahren. Vorerkrankungen, die später kommen, können Sie dann unter Umständen gar nicht mehr absichern."",
-      "„Bei der Altersvorsorge gilt: Jedes Jahr zählt doppelt. Wer mit 25 anfängt statt mit 35, zahlt oft die Hälfte für dasselbe Ergebnis – das ist Mathematik, kein Verkaufsgespräch.""
+      'Genau das ist der Punkt – Sie sind jung! Und das ist der beste Vorteil, den Sie gerade haben. Nutzen wir ihn.',
+      'Je früher Sie einsteigen, desto günstiger ist Ihr Beitrag. Mit jedem Jahr, das vergeht, zahlen Sie mehr – manchmal 10–15 % mehr pro Jahr.',
+      'Und Ihre Gesundheit ist heute wahrscheinlich besser als in zehn Jahren. Vorerkrankungen, die später kommen, können Sie dann unter Umständen gar nicht mehr absichern.',
+      'Bei der Altersvorsorge gilt: Jedes Jahr zählt doppelt. Wer mit 25 anfängt statt mit 35, zahlt oft die Hälfte für dasselbe Ergebnis – das ist Mathematik, kein Verkaufsgespräch.',
     ]
   }
 ];
