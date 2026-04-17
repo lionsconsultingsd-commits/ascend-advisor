@@ -68,9 +68,10 @@ export default function EinwandPanel() {
               </div>
             </div>
 
-            <h3 className="text-sm font-semibold text-foreground mb-3 px-1">
-              So reagierst du:
+            <h3 className="text-sm font-semibold text-foreground mb-1 px-1">
+              Sag genau das:
             </h3>
+            <p className="text-xs text-muted-foreground mb-3 px-1">Schritt für Schritt – in dieser Reihenfolge sprechen</p>
 
             <div className="space-y-2">
               {selected.behandlung.map((step, i) => (
@@ -83,7 +84,7 @@ export default function EinwandPanel() {
                   <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                     {i + 1}
                   </div>
-                  <p className="text-sm text-foreground leading-relaxed">{step}</p>
+                  <p className="text-sm text-foreground leading-relaxed italic">{step}</p>
                 </div>
               ))}
             </div>

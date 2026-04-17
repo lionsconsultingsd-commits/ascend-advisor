@@ -119,84 +119,84 @@ export const EINWAENDE = [
     id: "e1",
     einwand: "Das ist mir zu teuer",
     kategorie: "Preis",
-    emoji: "\uD83D\uDCB0",
+    emoji: "💰",
     behandlung: [
-      "Verständnis zeigen: 'Ich verstehe, dass der Preis wichtig ist.'",
-      "Herunterbrechen: 'Das sind nur X\u20AC pro Tag - weniger als ein Kaffee.'",
-      "Gegenrechnung: 'Was würde es kosten, KEINE Absicherung zu haben?'",
-      "Alternative: 'Wir können den Schutz anpassen, damit er ins Budget passt.'"
+      "„Ich verstehe Sie vollkommen – Preis ist ein wichtiger Faktor. Darf ich Ihnen kurz zeigen, was dahintersteckt?"",
+      "„Wenn wir den Beitrag auf den Tag herunterrechnen, sind das gerade mal [X] € – das ist weniger als ein Kaffee am Morgen."",
+      "„Stellen Sie sich kurz vor: Was würde es Sie kosten, wenn Sie morgen nicht mehr arbeiten könnten und keine Absicherung hätten?"",
+      "„Wir können den Schutz auch anpassen – welcher Betrag wäre für Sie monatlich angenehm?""
     ]
   },
   {
     id: "e2",
     einwand: "Ich muss noch darüber nachdenken",
     kategorie: "Aufschieben",
-    emoji: "\uD83E\uDD14",
+    emoji: "🤔",
     behandlung: [
-      "Wertschätzung: 'Das ist verständlich, es ist eine wichtige Entscheidung.'",
-      "Konkretisieren: 'Was genau möchten Sie noch bedenken?'",
-      "Dringlichkeit: 'Ihr Gesundheitszustand ist jetzt optimal - das kann sich ändern.'",
-      "Verbindlichkeit: 'Soll ich Ihnen die Unterlagen mitgeben? Wann sprechen wir uns wieder?'"
+      "„Das ist absolut verständlich – es ist eine wichtige Entscheidung. Was genau möchten Sie noch bedenken? Vielleicht kann ich Ihnen dabei helfen."",
+      "„Gibt es etwas, das Ihnen noch nicht ganz klar ist, oder einen Punkt, bei dem Sie sich unsicher fühlen?"",
+      "„Ich möchte Sie nur darauf hinweisen: Ihr Gesundheitszustand ist heute optimal. Das kann sich jederzeit ändern – und dann wird eine Absicherung deutlich teurer oder sogar unmöglich."",
+      "„Wann in etwa würden Sie sich eine Entscheidung vorstellen? Soll ich Ihnen die Unterlagen mitgeben und wir telefonieren in drei Tagen kurz nach?""
     ]
   },
   {
     id: "e3",
     einwand: "Ich habe schon einen Berater",
     kategorie: "Wettbewerb",
-    emoji: "\uD83E\uDD1D",
+    emoji: "🤝",
     behandlung: [
-      "Respekt: 'Super, dass Sie bereits beraten werden.'",
-      "Mehrwert: 'Eine Zweitmeinung kann nie schaden - kostenlos und unverbindlich.'",
-      "Check: 'Wann wurde Ihr Schutz zuletzt überprüft?'",
-      "Vergleich: 'Oft gibt es Einsparpotential bei gleichem oder besserem Schutz.'"
+      "„Das ist sehr gut – zeigt, dass Sie das Thema ernst nehmen. Darf ich fragen, wann Sie zuletzt eine unabhängige Überprüfung hatten?"",
+      "„Eine Zweitmeinung kostet Sie nichts und verpflichtet zu nichts. Viele meiner Kunden haben durch einen kurzen Vergleich bares Geld gespart."",
+      "„Gerade weil ich als unabhängiger Makler tätig bin, kann ich Angebote von über 200 Gesellschaften vergleichen – das kann kaum ein gebundener Vertreter."",
+      "„Wenn Sie am Ende sagen: ‚Mein bisheriger Schutz ist top' – perfekt. Aber falls wir etwas Besseres finden, wäre das doch gut zu wissen, oder?""
     ]
   },
   {
     id: "e4",
     einwand: "Das brauche ich nicht",
     kategorie: "Kein Bedarf",
-    emoji: "\uD83D\uDEAB",
+    emoji: "🚫",
     behandlung: [
-      "Nachfragen: 'Was genau meinen Sie - den Schutz allgemein oder dieses Produkt?'",
-      "Szenario: 'Stellen Sie sich vor, morgen passiert X - wer zahlt dann?'",
-      "Statistik: 'Jeder 4. wird berufsunfähig - das Risiko ist real.'",
-      "Emotion: 'Es geht um die Absicherung Ihrer Familie.'"
+      "„Ich höre Sie – darf ich kurz nachfragen: Meinen Sie, dass Sie grundsätzlich gut abgesichert sind, oder dass dieses spezifische Produkt nicht zu Ihnen passt?"",
+      "„Stellen Sie sich vor: Sie werden morgen krank und können sechs Monate nicht arbeiten. Wie würden Sie in dieser Zeit Ihre Miete, Ihren Kredit, Ihren Lebensunterhalt finanzieren?"",
+      "„Statistisch wird jeder vierte Arbeitnehmer in Deutschland mindestens einmal in seinem Leben berufsunfähig – das ist keine Seltenheit, das ist Realität."",
+      "„Es geht letztlich nicht um mich oder eine Versicherung – es geht darum, dass Ihre Familie und Sie im Ernstfall abgesichert sind. Das ist Ihre Entscheidung, und ich respektiere sie.""
     ]
   },
   {
     id: "e5",
     einwand: "Versicherungen zahlen sowieso nicht",
     kategorie: "Misstrauen",
-    emoji: "\uD83D\uDE24",
+    emoji: "😤",
     behandlung: [
-      "Verstehen: 'Das höre ich öfter - und manchmal stimmt es leider auch.'",
-      "Aufklärung: 'Deswegen ist die richtige Produktwahl so wichtig.'",
-      "Qualität: 'Ich arbeite nur mit Gesellschaften, die eine hohe Leistungsquote haben.'",
-      "Beispiele: 'Die Leistungsquote bei BU liegt bei über 75% - mit guter Beratung noch höher.'"
+      "„Das höre ich öfter – und ich verstehe, warum viele das denken. Leider gibt es schwarze Schafe in der Branche. Genau deswegen ist die Wahl des richtigen Produkts und Anbieters so entscheidend."",
+      "„Ich arbeite ausschließlich mit Gesellschaften, die nachweislich hohe Leistungsquoten haben. Die kann ich Ihnen schwarz auf weiß zeigen."",
+      "„Bei Berufsunfähigkeitsversicherungen beispielsweise liegt die Leistungsquote bei seriösen Anbietern über 80 %. Das bedeutet: In 8 von 10 Fällen wird gezahlt."",
+      "„Meine Aufgabe ist es, den Antrag von Anfang an so sauber zu stellen, dass es im Leistungsfall keine Diskussion gibt. Dafür bin ich dann auch Ihr Ansprechpartner – nicht nur beim Abschluss.""
     ]
   },
   {
     id: "e6",
     einwand: "Mein Partner muss mitentscheiden",
     kategorie: "Dritte",
-    emoji: "\uD83D\uDC6B",
+    emoji: "👫",
     behandlung: [
-      "Verständnis: 'Absolut, so eine Entscheidung trifft man gemeinsam.'",
-      "Zusammenfassen: 'Soll ich Ihnen die wichtigsten Punkte zusammenfassen?'",
-      "Einladen: 'Gerne lade ich Ihren Partner zum nächsten Termin ein.'",
-      "Festhalten: 'Halten wir fest, was Ihnen gefallen hat - das hilft beim Gespräch.'"
+      "„Das ist absolut richtig und zeigt, dass Sie als Team entscheiden – das finde ich sehr gut."",
+      "„Soll ich Ihnen eine kurze Zusammenfassung mitgeben, die Sie Ihrem Partner zeigen können? So hat er oder sie alle wichtigen Punkte auf einen Blick."",
+      "„Noch besser: Wie wäre es, wenn wir einen gemeinsamen Termin machen – gerne auch kurz per Video? So kann Ihr Partner direkt Fragen stellen."",
+      "„Was hat Ihnen persönlich heute am besten gefallen? Das können wir als Ausgangspunkt für das Gespräch mit Ihrem Partner nehmen.""
     ]
   },
   {
     id: "e7",
     einwand: "Ich bin noch jung, das hat Zeit",
     kategorie: "Alter",
-    emoji: "\u23F0",
+    emoji: "⏰",
     behandlung: [
-      "Bestätigen: 'Genau deswegen ist JETZT der beste Zeitpunkt!'",
-      "Preis: 'Je jünger, desto günstiger - der Beitrag steigt mit jedem Jahr.'",
-      "Gesundheit: 'Jetzt sind Sie gesund - eine Vorerkrankung kann alles ändern.'",
-      "Zinseszins: 'Bei der Altersvorsorge zählt jedes Jahr - der Zinseszinseffekt ist enorm.'"
+      "„Genau das ist der Punkt – Sie sind jung! Und das ist der beste Vorteil, den Sie gerade haben. Nutzen wir ihn."",
+      "„Je früher Sie einsteigen, desto günstiger ist Ihr Beitrag. Mit jedem Jahr, das vergeht, zahlen Sie mehr – manchmal 10–15 % mehr pro Jahr."",
+      "„Und Ihre Gesundheit ist heute wahrscheinlich besser als in zehn Jahren. Vorerkrankungen, die später kommen, können Sie dann unter Umständen gar nicht mehr absichern."",
+      "„Bei der Altersvorsorge gilt: Jedes Jahr zählt doppelt. Wer mit 25 anfängt statt mit 35, zahlt oft die Hälfte für dasselbe Ergebnis – das ist Mathematik, kein Verkaufsgespräch.""
     ]
   }
 ];
