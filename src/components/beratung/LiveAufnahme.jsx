@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Monitor, Square, Loader2, FileText, Check, AlertCircle, Mic } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import ReactMarkdown from "react-markdown";
+import PdfDownloadButton from "@/components/beratung/PdfDownloadButton";
 
 export default function LiveAufnahme({ beratung, onProtocolGenerated }) {
   const [recording, setRecording] = useState(false);
@@ -215,18 +216,21 @@ export default function LiveAufnahme({ beratung, onProtocolGenerated }) {
 
       {/* Protokoll-Anzeige */}
       {protokoll && (
-        <div className="bg-card border rounded-2xl p-5">
-          <div className="flex items-center gap-2 mb-3">
-            <FileText className="w-4 h-4 text-primary" />
-            <h3 className="font-semibold text-sm">Generiertes Protokoll</h3>
-            <span className="ml-auto flex items-center gap-1 text-xs text-accent">
-              <Check className="w-3 h-3" /> {beratung?.upl_kontakt_id ? "Gespeichert & ins CRM übertragen" : "Gespeichert"}
-            </span>
+        <>
+          <div className="bg-card border rounded-2xl p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <FileText className="w-4 h-4 text-primary" />
+              <h3 className="font-semibold text-sm">Generiertes Protokoll</h3>
+              <span className="ml-auto flex items-center gap-1 text-xs text-accent">
+                <Check className="w-3 h-3" /> {beratung?.upl_kontakt_id ? "Gespeichert & ins CRM übertragen" : "Gespeichert"}
+              </span>
+            </div>
+            <div className="prose prose-sm max-w-none text-foreground text-sm leading-relaxed">
+              <ReactMarkdown>{protokoll}</ReactMarkdown>
+            </div>
           </div>
-          <div className="prose prose-sm max-w-none text-foreground text-sm leading-relaxed">
-            <ReactMarkdown>{protokoll}</ReactMarkdown>
-          </div>
-        </div>
+          <PdfDownloadButton beratung={{ ...beratung, protokoll_text: protokoll }} />
+        </>
       )}
     </div>
   );
