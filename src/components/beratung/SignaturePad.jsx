@@ -49,6 +49,8 @@ export default function SignaturePad({ onSigned, existingUrl }) {
     if (!drawing) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+    const fg = getComputedStyle(document.documentElement).getPropertyValue("--foreground").trim();
+    ctx.strokeStyle = `hsl(${fg})`;
     const pos = getPos(e, canvas);
     ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
