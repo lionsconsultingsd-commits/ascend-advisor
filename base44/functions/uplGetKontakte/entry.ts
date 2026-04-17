@@ -14,7 +14,7 @@ Deno.serve(async (req) => {
     const uplClient = createClient({ appId: UPL_APP_ID });
     uplClient.auth.setToken(token);
 
-    const kontakte = await uplClient.entities.Contact.list();
+    const kontakte = await uplClient.entities.Contact.filter({ created_by: user.email });
 
     return Response.json({ kontakte });
   } catch (error) {
