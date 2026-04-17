@@ -18,15 +18,13 @@ export default function PdfDownloadButton({ beratung }) {
         unterschrift_url: beratung.unterschrift_url || null,
         kunde_name: beratung.kunde_name,
         datum: beratung.datum || new Date().toLocaleDateString("de-DE"),
-      }, { responseType: "blob" });
+      });
 
-      const blob = res.data;
-      const url = URL.createObjectURL(blob);
+      const { pdf_base64 } = res.data;
       const a = document.createElement("a");
-      a.href = url;
+      a.href = pdf_base64;
       a.download = `Beratungsprotokoll_${(beratung.kunde_name || "Kunde").replace(/\s+/g, "_")}.pdf`;
       a.click();
-      URL.revokeObjectURL(url);
     } catch (err) {
       setError(err.message);
     } finally {
