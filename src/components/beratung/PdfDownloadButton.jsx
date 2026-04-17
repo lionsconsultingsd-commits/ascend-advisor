@@ -49,8 +49,10 @@ export default function PdfDownloadButton({ beratung }) {
           <>
             <Download className="w-4 h-4" />
             Protokoll als PDF herunterladen
-            {beratung?.unterschrift_url && (
+            {beratung?.unterschrift_url ? (
               <span className="text-xs text-accent ml-1">(mit Unterschrift)</span>
+            ) : (
+              <span className="text-xs text-muted-foreground ml-1">(ohne Unterschrift – für Insign)</span>
             )}
           </>
         )}
