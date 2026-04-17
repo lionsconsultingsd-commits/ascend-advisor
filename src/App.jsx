@@ -6,7 +6,6 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Beratung from './pages/Beratung';
-import SignaturePage from './pages/SignaturePage';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -36,7 +35,6 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       <Route path="/" element={<Beratung />} />
-      <Route path="/signatur" element={<SignaturePage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
