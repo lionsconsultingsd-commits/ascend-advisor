@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import ProtocolGenerator from "./ProtocolGenerator";
 import LiveAufnahme from "./LiveAufnahme";
 import PdfDownloadButton from "@/components/beratung/PdfDownloadButton";
+import SignaturLinkButton from "@/components/beratung/SignaturLinkButton";
 
 const TABS = [
   { id: "mikrofon", label: "Mikrofon", icon: Mic },
@@ -38,10 +39,13 @@ export default function ProtokollTabs({ beratung, onProtocolGenerated }) {
         })}
       </div>
 
-      {/* PDF Download – immer sichtbar wenn Protokoll vorhanden */}
+      {/* PDF Download & Signatur-Link – immer sichtbar wenn Protokoll vorhanden */}
       {beratung?.protokoll_text && (
-        <div className="px-4 pb-2">
+        <div className="px-4 pb-2 space-y-3">
           <PdfDownloadButton beratung={beratung} />
+          {activeTab === "live" && beratung?.id && (
+            <SignaturLinkButton beratungId={beratung.id} />
+          )}
         </div>
       )}
 
