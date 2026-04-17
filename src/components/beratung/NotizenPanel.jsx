@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Save, Check } from "lucide-react";
 
-export default function NotizenPanel({ notizen, onSave }) {
+export default function NotizenPanel({ notizen, onSave, compact = false }) {
   const [text, setText] = useState(notizen || "");
   const [saved, setSaved] = useState(false);
   const timeoutRef = useRef(null);
@@ -22,6 +22,25 @@ export default function NotizenPanel({ notizen, onSave }) {
     }, 1500);
     return () => clearTimeout(timeoutRef.current);
   }, [text]);
+
+  if (compact) {
+    return (
+      <div className="flex-1 flex flex-col px-3 pb-3">
+        {saved && (
+          <span className="flex items-center gap-1 text-xs text-accent font-medium mb-1 self-end">
+            <Check className="w-3 h-3" />
+            Gespeichert
+          </span>
+        )}
+        <Textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder={"Notizen eingeben...\n\nz.B. Budget, Wünsche, Vorerkrankungen..."}
+          className="flex-1 rounded-xl text-xs resize-none bg-card border shadow-sm p-3 focus:ring-primary"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 flex flex-col px-4 pb-4">

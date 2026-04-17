@@ -154,7 +154,6 @@ export default function Beratung() {
         <div className="px-4 pt-3 pb-1">
           <h2 className="text-lg font-bold">
             {activeTab === "einwaende" && "Einwandbehandlung"}
-            {activeTab === "notizen" && "Notizen"}
             {activeTab === "upl" && "UPL Sync"}
             {activeTab === "protokoll" && "KI-Protokoll"}
             {activeTab === "unterschrift" && "Unterschrift"}
@@ -165,21 +164,30 @@ export default function Beratung() {
       {/* Content */}
       <div className="flex-1 overflow-hidden flex flex-col pt-2">
         {activeTab === "leitfaden" && (
-          <PhaseCard
-            aktuellePhase={aktuellePhase}
-            abgeschlosseneFragen={activeBeratung?.abgeschlossene_fragen || []}
-            onFrageToggle={handleFrageToggle}
-            onWeiter={() => handlePhaseChange(Math.min(aktuellePhase + 1, 6))}
-            onZurueck={() => handlePhaseChange(Math.max(aktuellePhase - 1, 0))}
-          />
+          <div className="flex-1 overflow-hidden flex flex-row gap-0">
+            <div className="flex-1 overflow-hidden flex flex-col min-w-0">
+              <PhaseCard
+                aktuellePhase={aktuellePhase}
+                abgeschlosseneFragen={activeBeratung?.abgeschlossene_fragen || []}
+                onFrageToggle={handleFrageToggle}
+                onWeiter={() => handlePhaseChange(Math.min(aktuellePhase + 1, 6))}
+                onZurueck={() => handlePhaseChange(Math.max(aktuellePhase - 1, 0))}
+              />
+            </div>
+            <div className="w-px bg-border shrink-0" />
+            <div className="w-64 shrink-0 overflow-hidden flex flex-col">
+              <div className="px-3 pt-2 pb-1">
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Notizen</p>
+              </div>
+              <NotizenPanel
+                notizen={activeBeratung?.notizen}
+                onSave={handleNotizenSave}
+                compact
+              />
+            </div>
+          </div>
         )}
         {activeTab === "einwaende" && <EinwandPanel />}
-        {activeTab === "notizen" && (
-          <NotizenPanel
-            notizen={activeBeratung?.notizen}
-            onSave={handleNotizenSave}
-          />
-        )}
         {activeTab === "upl" && (
           <UplPanel
             beratung={activeBeratung}
