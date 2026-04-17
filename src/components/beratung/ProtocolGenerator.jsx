@@ -5,7 +5,7 @@ import { base44 } from "@/api/base44Client";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 
-export default function ProtocolGenerator({ beratung, onProtocolGenerated }) {
+export default function ProtocolGenerator({ beratung, onProtocolGenerated, onCrmSynced }) {
   const [recording, setRecording] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -64,11 +64,14 @@ export default function ProtocolGenerator({ beratung, onProtocolGenerated }) {
           kunde_name: beratung?.kunde_name,
           phase: `Phase ${(beratung?.aktuelle_phase || 0) + 1}`,
           notizen: beratung?.notizen || "",
+          abgeschlossene_fragen: beratung?.abgeschlossene_fragen || [],
+          upl_kontakt_id: beratung?.upl_kontakt_id || null,
         });
 
-        const { protokoll: generiertes } = res.data;
+        const { protokoll: generiertes, crm_synced } = res.data;
         setProtokoll(generiertes);
         onProtocolGenerated(generiertes);
+        if (crm_synced && onCrmSynced) onCrmSynced();
       } catch (err) {
         setError("Fehler bei der Protokollerstellung. Bitte erneut versuchen.");
       } finally {
@@ -146,7 +149,7 @@ export default function ProtocolGenerator({ beratung, onProtocolGenerated }) {
             <FileText className="w-4 h-4 text-primary" />
             <h3 className="font-semibold text-sm">Generiertes Protokoll</h3>
             <span className="ml-auto flex items-center gap-1 text-xs text-accent">
-              <Check className="w-3 h-3" /> Gespeichert
+              <Check className="w-3 h-3" /> {beratung?.upl_kontakt_id ? "Gespeichert & ins CRM übertragen" : "Gespeichert"}
             </span>
           </div>
           <div className="prose prose-sm max-w-none text-foreground text-sm leading-relaxed">

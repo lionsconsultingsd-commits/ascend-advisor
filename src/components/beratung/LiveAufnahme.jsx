@@ -125,9 +125,11 @@ export default function LiveAufnahme({ beratung, onProtocolGenerated }) {
           kunde_name: beratung?.kunde_name,
           phase: `Phase ${(beratung?.aktuelle_phase || 0) + 1}`,
           notizen: beratung?.notizen || "",
+          abgeschlossene_fragen: beratung?.abgeschlossene_fragen || [],
+          upl_kontakt_id: beratung?.upl_kontakt_id || null,
         });
 
-        const { protokoll: generiertes } = res.data;
+        const { protokoll: generiertes, crm_synced } = res.data;
         setProtokoll(generiertes);
         onProtocolGenerated(generiertes);
       } catch (err) {
@@ -218,7 +220,7 @@ export default function LiveAufnahme({ beratung, onProtocolGenerated }) {
             <FileText className="w-4 h-4 text-primary" />
             <h3 className="font-semibold text-sm">Generiertes Protokoll</h3>
             <span className="ml-auto flex items-center gap-1 text-xs text-accent">
-              <Check className="w-3 h-3" /> Gespeichert
+              <Check className="w-3 h-3" /> {beratung?.upl_kontakt_id ? "Gespeichert & ins CRM übertragen" : "Gespeichert"}
             </span>
           </div>
           <div className="prose prose-sm max-w-none text-foreground text-sm leading-relaxed">

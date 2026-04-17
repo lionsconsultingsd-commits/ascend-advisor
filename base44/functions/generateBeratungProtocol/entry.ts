@@ -1,5 +1,7 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
+import { createClientFromRequest, createClient } from 'npm:@base44/sdk@0.8.25';
 import OpenAI from 'npm:openai';
+
+const UPL_APP_ID = "69c140c42b1fc3201ee09f2a";
 
 const openai = new OpenAI({
   apiKey: Deno.env.get("OPENAI_API_KEY"),
@@ -13,7 +15,7 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { audio_base64, beratung_id, kunde_name, phase, notizen } = await req.json();
+    const { audio_base64, beratung_id, kunde_name, phase, notizen, abgeschlossene_fragen, upl_kontakt_id } = await req.json();
 
     if (!audio_base64) {
       return Response.json({ error: 'audio_base64 ist erforderlich' }, { status: 400 });
@@ -156,10 +158,60 @@ Beratungsphase: ${phase || 'nicht angegeben'}`;
 
     const protokoll = completion.choices[0].message.content;
 
+    // Fragen/Antworten als strukturiertes Dokument aufbereiten
+    const PFLICHTFRAGEN_MAP = {
+      pf1: { phase: "Begrüßung & Rapport", frage: "Wie sind Sie auf uns aufmerksam geworden?" },
+      pf2: { phase: "Begrüßung & Rapport", frage: "Datenschutzeinwilligung eingeholt?" },
+      pf3: { phase: "Bedarfsanalyse", frage: "Familienstand & Kinder?" },
+      pf4: { phase: "Bedarfsanalyse", frage: "Beruf & Einkommen?" },
+      pf5: { phase: "Bedarfsanalyse", frage: "Bestehende Versicherungen?" },
+      pf6: { phase: "Bedarfsanalyse", frage: "Welche Ziele & Wünsche hat der Kunde?" },
+      pf7: { phase: "Risikoanalyse", frage: "Gesundheitszustand & Vorerkrankungen?" },
+      pf8: { phase: "Risikoanalyse", frage: "Hobbys mit erhöhtem Risiko?" },
+      pf9: { phase: "Risikoanalyse", frage: "Was passiert bei Berufsunfähigkeit?" },
+      pf10: { phase: "Risikoanalyse", frage: "Haftpflichtrisiken besprochen?" },
+      pf11: { phase: "Lösungspräsentation", frage: "Budget des Kunden geklärt?" },
+      pf12: { phase: "Lösungspräsentation", frage: "Leistungsunterschiede erklärt?" },
+      pf13: { phase: "Abschluss", frage: "Widerrufsrecht erklärt?" },
+      pf14: { phase: "Abschluss", frage: "Beratungsprotokoll unterschrieben?" },
+      pf15: { phase: "Nachbereitung", frage: "Empfehlungsfrage gestellt?" },
+      pf16: { phase: "Nachbereitung", frage: "Nächster Kontakttermin vereinbart?" },
+    };
+
+    const abgeschlossen = abgeschlossene_fragen || [];
+    const fragenDokument = `# Pflichtfragen – Beratung vom ${new Date().toLocaleDateString('de-DE')}
+Kunde: ${kunde_name || 'nicht angegeben'} | Berater: ${user.full_name || 'nicht angegeben'}
+
+${Object.entries(PFLICHTFRAGEN_MAP).map(([id, { phase: p, frage }]) =>
+  `[${abgeschlossen.includes(id) ? 'X' : ' '}] ${p}: ${frage}`
+).join('\n')}
+
+Beantwortet: ${abgeschlossen.length}/${Object.keys(PFLICHTFRAGEN_MAP).length}`;
+
+    const notizenDokument = `# Beratungsnotizen – ${new Date().toLocaleDateString('de-DE')}
+Kunde: ${kunde_name || 'nicht angegeben'} | Berater: ${user.full_name || 'nicht angegeben'}
+
+${notizen || 'Keine Notizen erfasst.'}`;
+
+    // Wenn UPL-Kontakt verknüpft, alle 3 Dokumente ins CRM schreiben
+    if (upl_kontakt_id) {
+      const token = Deno.env.get("UPL_APP_SERVICE_TOKEN");
+      const uplClient = createClient({ appId: UPL_APP_ID });
+      uplClient.auth.setToken(token);
+
+      await uplClient.entities.Contact.update(upl_kontakt_id, {
+        beratungsprotokoll: protokoll,
+        beratungsnotizen: notizenDokument,
+        pflichtfragen: fragenDokument,
+        pipeline_status: ["beratung_abgeschlossen"],
+      });
+    }
+
     return Response.json({ 
       success: true, 
       transkript,
-      protokoll 
+      protokoll,
+      crm_synced: !!upl_kontakt_id,
     });
 
   } catch (error) {
