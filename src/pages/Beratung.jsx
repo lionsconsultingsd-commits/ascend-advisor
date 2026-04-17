@@ -13,6 +13,7 @@ import LiveAufnahme from "@/components/beratung/LiveAufnahme";
 import ProtokollTabs from "@/components/beratung/ProtokollTabs";
 import SignaturePad from "@/components/beratung/SignaturePad";
 import { X, MoreVertical, CheckCircle } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -97,6 +98,16 @@ export default function Beratung() {
     setActiveBeratungId(null);
   };
 
+  // Apply saved theme on mount
+  React.useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark" || !saved) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
   // Start screen
   if (!activeBeratungId) {
     const recentActive = beratungen.filter((b) => b.status === "aktiv").slice(0, 5);
@@ -126,7 +137,9 @@ export default function Beratung() {
           </div>
         </div>
 
-        <DropdownMenu>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors">
               <MoreVertical className="w-4 h-4" />
@@ -139,6 +152,7 @@ export default function Beratung() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        </div>
       </header>
 
       {/* Progress (only on Leitfaden tab) */}
