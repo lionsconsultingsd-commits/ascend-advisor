@@ -26,10 +26,20 @@ export default function Beratung() {
   const [activeTab, setActiveTab] = useState("leitfaden");
   const queryClient = useQueryClient();
 
-  // Fetch recent sessions
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    base44.auth.me().then(setCurrentUser);
+  }, []);
+
+  // Fetch only own sessions
   const { data: beratungen = [] } = useQuery({
-    queryKey: ["beratungen"],
-    queryFn: () => base44.entities.Beratung.list("-created_date", 10),
+    queryKey: ["beratungen", currentUser?.email],
+    queryFn: () =>
+      currentUser
+        ? base44.entities.Beratung.filter({ created_by: currentUser.email }, "-created_date", 10)
+        : [],
+    enabled: !!currentUser,
   });
 
   // Current session
