@@ -46,6 +46,20 @@
       "type": "boolean",
       "default": false,
       "description": "Ob die Daten an UPL \u00fcbertragen wurden"
+    },
+    "protokoll_text": {
+      "type": "string",
+      "default": "",
+      "description": "KI-generiertes Beratungsprotokoll"
+    },
+    "protokoll_datum": {
+      "type": "string",
+      "format": "date",
+      "description": "Datum der Protokollerstellung"
+    },
+    "unterschrift_url": {
+      "type": "string",
+      "description": "URL der digitalen Unterschrift des Kunden"
     }
   },
   "required": [

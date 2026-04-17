@@ -8,6 +8,8 @@ import NotizenPanel from "@/components/beratung/NotizenPanel";
 import UplPanel from "@/components/beratung/UplPanel";
 import BottomNav from "@/components/beratung/BottomNav";
 import StartDialog from "@/components/beratung/StartDialog";
+import ProtocolGenerator from "@/components/beratung/ProtocolGenerator";
+import SignaturePad from "@/components/beratung/SignaturePad";
 import { X, MoreVertical, CheckCircle } from "lucide-react";
 import {
   DropdownMenu,
@@ -152,6 +154,8 @@ export default function Beratung() {
             {activeTab === "einwaende" && "Einwandbehandlung"}
             {activeTab === "notizen" && "Notizen"}
             {activeTab === "upl" && "UPL Sync"}
+            {activeTab === "protokoll" && "KI-Protokoll"}
+            {activeTab === "unterschrift" && "Unterschrift"}
           </h2>
         </div>
       )}
@@ -178,6 +182,23 @@ export default function Beratung() {
           <UplPanel
             beratung={activeBeratung}
             onSyncStatusChange={(synced) => handleUpdate({ upl_synced: synced })}
+          />
+        )}
+        {activeTab === "protokoll" && (
+          <ProtocolGenerator
+            beratung={activeBeratung}
+            onProtocolGenerated={(text) =>
+              handleUpdate({
+                protokoll_text: text,
+                protokoll_datum: new Date().toISOString().split("T")[0],
+              })
+            }
+          />
+        )}
+        {activeTab === "unterschrift" && (
+          <SignaturePad
+            existingUrl={activeBeratung?.unterschrift_url}
+            onSigned={(url) => handleUpdate({ unterschrift_url: url })}
           />
         )}
       </div>
