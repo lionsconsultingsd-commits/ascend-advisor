@@ -248,7 +248,7 @@ export default function Beratung() {
               />
             </div>
             <div className="w-px bg-border shrink-0" />
-            <div className="w-64 shrink-0 overflow-hidden flex flex-col">
+            <div className={`${isErstgespraech && (aktuellePhase === 3 || aktuellePhase === 4) ? "w-96" : "w-64"} shrink-0 overflow-hidden flex flex-col transition-all duration-300`}>
               {/* Erstgespräch Phase 3 = Einnahmen/Ausgaben Rechner */}
               {isErstgespraech && aktuellePhase === 3 ? (
                 <>
@@ -273,6 +273,7 @@ export default function Beratung() {
                   <NotizenPanel notizen={activeBeratung?.notizen} onSave={(text) => handleUpdate({ notizen: text })} compact />
                 </>
               )}
+
             </div>
           </div>
         )}
