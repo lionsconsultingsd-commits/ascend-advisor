@@ -1,0 +1,50 @@
+{
+  "name": "AuditTrail",
+  "type": "object",
+  "properties": {
+    "beratung_id": {
+      "type": "string",
+      "description": "ID der zugeh\u00f6rigen Beratung"
+    },
+    "kunde_name": {
+      "type": "string",
+      "description": "Name des Kunden"
+    },
+    "upl_kontakt_id": {
+      "type": "string",
+      "description": "ID des UPL-Kontakts"
+    },
+    "aktion": {
+      "type": "string",
+      "description": "Art der Aktion (z.B. Phasenwechsel, Status-Update, Protokoll erstellt)"
+    },
+    "details": {
+      "type": "string",
+      "description": "Detaillierte Beschreibung der Aktion"
+    },
+    "vorheriger_status": {
+      "type": "string",
+      "description": "Status vor der \u00c4nderung"
+    },
+    "neuer_status": {
+      "type": "string",
+      "description": "Status nach der \u00c4nderung"
+    },
+    "phase": {
+      "type": "number",
+      "description": "Phase zum Zeitpunkt der Aktion"
+    },
+    "gespraechstyp": {
+      "type": "string",
+      "description": "Gespr\u00e4chstyp der Beratung"
+    },
+    "berater_email": {
+      "type": "string",
+      "description": "E-Mail des Beraters"
+    }
+  },
+  "required": [
+    "beratung_id",
+    "aktion"
+  ]
+}

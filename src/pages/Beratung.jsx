@@ -21,8 +21,12 @@ import ZieleGuide from "@/components/beratung/ZieleGuide";
 import VersorgungslueckenGuide from "@/components/beratung/VersorgungslueckenGuide";
 import WorstCaseGuide from "@/components/beratung/WorstCaseGuide";
 import ProduktPraesentationGuide from "@/components/beratung/ProduktPraesentationGuide";
+import KundenInfoBanner from "@/components/beratung/KundenInfoBanner";
+import ComplianceWarning, { COMPLIANCE_FRAGEN } from "@/components/beratung/ComplianceWarning";
+import UplStatusSync from "@/components/beratung/UplStatusSync";
+import BeratungsfortschrittBadge from "@/components/beratung/BeratungsfortschrittBadge";
 import ThemeToggle from "@/components/ThemeToggle";
-import { X, MoreVertical, CheckCircle } from "lucide-react";
+import { X, MoreVertical, CheckCircle, ExternalLink } from "lucide-react";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -122,7 +126,33 @@ export default function Beratung() {
     updateMutation.mutate({ id: activeBeratungId, data });
   };
 
+  const handlePhaseChange = (newPhase) => {
+    if (!activeBeratungId) return;
+    logAudit(
+      "Phasenwechsel",
+      `Phase gewechselt von ${aktuellePhase + 1} zu ${newPhase + 1}`,
+    );
+    handleUpdate({ aktuelle_phase: newPhase });
+  };
+
+  // Audit-Trail loggen
+  const logAudit = async (aktion, details, vorheriger_status = null, neuer_status = null) => {
+    if (!activeBeratung) return;
+    base44.functions.invoke("logAuditTrail", {
+      beratung_id: activeBeratungId,
+      kunde_name: activeBeratung.kunde_name,
+      upl_kontakt_id: activeBeratung.upl_kontakt_id || null,
+      aktion,
+      details,
+      vorheriger_status,
+      neuer_status,
+      phase: activeBeratung.aktuelle_phase,
+      gespraechstyp: activeBeratung.gespraechstyp,
+    }).catch(() => {});
+  };
+
   const handleBeratungAbschliessen = async () => {
+    await logAudit("Beratung abgeschlossen", "Beratung wurde als abgeschlossen markiert", "aktiv", "abgeschlossen");
     await updateMutation.mutateAsync({ id: activeBeratungId, data: { status: "abgeschlossen" } });
     await autoPipelineUpdate({ ...activeBeratung, status: "abgeschlossen" });
     setActiveBeratungId(null);
@@ -164,6 +194,15 @@ export default function Beratung() {
   const isErstgespraech = activeBeratung?.gespraechstyp === "erstgespraech";
   const isBeratung1 = activeBeratung?.gespraechstyp === "beratung1";
 
+  // Compliance-Fragen für diesen Typ
+  const complianceFragen = COMPLIANCE_FRAGEN[activeBeratung?.gespraechstyp || "beratung1"] || [];
+  const complianceFragenIds = complianceFragen.map((f) => f.id);
+  const abgeschlosseneFragenAll = activeBeratung?.abgeschlossene_fragen || [];
+  const gesamtFragen = pflichtfragen.length + complianceFragen.length;
+  const abgeschlossenCount = abgeschlosseneFragenAll.filter(
+    (id) => pflichtfragen.some((f) => f.id === id) || complianceFragenIds.includes(id)
+  ).length;
+
   // Tab-Labels je nach Gesprächstyp
   const tabLabel = {
     leitfaden: "Leitfaden",
@@ -178,21 +217,30 @@ export default function Beratung() {
       {/* Header */}
       <header className="flex items-center justify-between px-4 py-3 bg-card/80 backdrop-blur-lg border-b">
         <div className="flex items-center gap-3 min-w-0">
-          <button
-            onClick={handleBeenden}
-            className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors shrink-0"
-          >
-            <X className="w-4 h-4" />
-          </button>
-          <div className="min-w-0">
-            <div className="flex items-center gap-1.5">
-              <span className="text-base">{gespraechstyp.emoji}</span>
-              <h1 className="text-sm font-bold truncate">{activeBeratung?.kunde_name}</h1>
-            </div>
+        <button
+          onClick={handleBeenden}
+          className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors shrink-0"
+          title="Zurück zur Übersicht"
+        >
+          <X className="w-4 h-4" />
+        </button>
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5">
+            <span className="text-base">{gespraechstyp.emoji}</span>
+            <h1 className="text-sm font-bold truncate">{activeBeratung?.kunde_name}</h1>
+          </div>
+          <div className="flex items-center gap-2 mt-0.5">
             <p className="text-[10px] text-muted-foreground">
               {gespraechstyp.label} · Phase {aktuellePhase + 1}/{phasen.length}
             </p>
+            <BeratungsfortschrittBadge
+              aktuellePhase={aktuellePhase}
+              gesamtPhasen={phasen.length}
+              abgeschlosseneFragen={abgeschlossenCount}
+              gesamtFragen={gesamtFragen}
+            />
           </div>
+        </div>
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
@@ -216,7 +264,7 @@ export default function Beratung() {
       {activeTab === "leitfaden" && (
         <ProgressBar
           aktuellePhase={aktuellePhase}
-          onPhaseClick={(p) => handleUpdate({ aktuelle_phase: p })}
+          onPhaseClick={handlePhaseChange}
           phasen={phasen}
         />
       )}
@@ -235,7 +283,19 @@ export default function Beratung() {
       {/* Content */}
       <div className="flex-1 overflow-hidden flex flex-col pt-2">
         {activeTab === "leitfaden" && (
-          <div className="flex-1 overflow-hidden flex flex-row gap-0">
+          <div className="flex-1 overflow-hidden flex flex-col">
+            {/* Kundenbanner + Compliance */}
+            <KundenInfoBanner beratung={activeBeratung} />
+            <ComplianceWarning
+              gespraechstyp={activeBeratung?.gespraechstyp}
+              abgeschlosseneFragen={activeBeratung?.abgeschlossene_fragen || []}
+              onFrageToggle={(frageId) => {
+                const current = activeBeratung?.abgeschlossene_fragen || [];
+                const updated = current.includes(frageId) ? current.filter((id) => id !== frageId) : [...current, frageId];
+                handleUpdate({ abgeschlossene_fragen: updated });
+              }}
+            />
+            <div className="flex-1 overflow-hidden flex flex-row gap-0">
             <div className="flex-1 overflow-hidden flex flex-col min-w-0">
               <PhaseCard
                 aktuellePhase={aktuellePhase}
@@ -245,8 +305,8 @@ export default function Beratung() {
                   const updated = current.includes(frageId) ? current.filter((id) => id !== frageId) : [...current, frageId];
                   handleUpdate({ abgeschlossene_fragen: updated });
                 }}
-                onWeiter={() => handleUpdate({ aktuelle_phase: Math.min(aktuellePhase + 1, phasen.length - 1) })}
-                onZurueck={() => handleUpdate({ aktuelle_phase: Math.max(aktuellePhase - 1, 0) })}
+                onWeiter={() => handlePhaseChange(Math.min(aktuellePhase + 1, phasen.length - 1))}
+                onZurueck={() => handlePhaseChange(Math.max(aktuellePhase - 1, 0))}
                 phasen={phasen}
                 pflichtfragen={pflichtfragen}
               />
@@ -303,6 +363,7 @@ export default function Beratung() {
 
             </div>
           </div>
+          </div>
         )}
 
         {activeTab === "einwaende" && (
@@ -312,7 +373,19 @@ export default function Beratung() {
         )}
 
         {activeTab === "upl" && (
-          <UplPanel beratung={activeBeratung} onSyncStatusChange={(synced) => handleUpdate({ upl_synced: synced })} />
+          <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-4">
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-muted-foreground">Status in UPL direkt aktualisieren</p>
+              <UplStatusSync
+                beratung={activeBeratung}
+                onSynced={(status) => {
+                  handleUpdate({ upl_synced: true });
+                  logAudit("UPL Status-Update", `Status auf "${status}" gesetzt`, null, status);
+                }}
+              />
+            </div>
+            <UplPanel beratung={activeBeratung} onSyncStatusChange={(synced) => handleUpdate({ upl_synced: synced })} />
+          </div>
         )}
 
         {activeTab === "protokoll" && (
