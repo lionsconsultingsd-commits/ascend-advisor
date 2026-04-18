@@ -296,25 +296,49 @@ export default function Beratung() {
               }}
             />
             <div className="flex-1 overflow-hidden flex flex-row gap-0">
-            <div className="flex-1 overflow-hidden flex flex-col min-w-0">
-              <PhaseCard
-                aktuellePhase={aktuellePhase}
-                abgeschlosseneFragen={activeBeratung?.abgeschlossene_fragen || []}
-                onFrageToggle={(frageId) => {
-                  const current = activeBeratung?.abgeschlossene_fragen || [];
-                  const updated = current.includes(frageId) ? current.filter((id) => id !== frageId) : [...current, frageId];
-                  handleUpdate({ abgeschlossene_fragen: updated });
-                }}
-                onWeiter={() => handlePhaseChange(Math.min(aktuellePhase + 1, phasen.length - 1))}
-                onZurueck={() => handlePhaseChange(Math.max(aktuellePhase - 1, 0))}
-                phasen={phasen}
-                pflichtfragen={pflichtfragen}
-              />
-            </div>
+            {/* Linke Hauptspalte: bei Erstgespräch Phase 3 = Rechner, sonst PhaseCard */}
+            {isErstgespraech && aktuellePhase === 3 ? (
+              <div className="flex-1 overflow-hidden flex flex-col min-w-0">
+                <div className="px-3 pt-2 pb-1">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Finanzrechner</p>
+                </div>
+                <EinnahmenAusgabenRechner />
+              </div>
+            ) : (
+              <div className="flex-1 overflow-hidden flex flex-col min-w-0">
+                <PhaseCard
+                  aktuellePhase={aktuellePhase}
+                  abgeschlosseneFragen={activeBeratung?.abgeschlossene_fragen || []}
+                  onFrageToggle={(frageId) => {
+                    const current = activeBeratung?.abgeschlossene_fragen || [];
+                    const updated = current.includes(frageId) ? current.filter((id) => id !== frageId) : [...current, frageId];
+                    handleUpdate({ abgeschlossene_fragen: updated });
+                  }}
+                  onWeiter={() => handlePhaseChange(Math.min(aktuellePhase + 1, phasen.length - 1))}
+                  onZurueck={() => handlePhaseChange(Math.max(aktuellePhase - 1, 0))}
+                  phasen={phasen}
+                  pflichtfragen={pflichtfragen}
+                />
+              </div>
+            )}
             <div className="w-px bg-border shrink-0" />
             <div className={`${(isErstgespraech && (aktuellePhase === 3 || aktuellePhase === 4)) || (isBeratung1 && (aktuellePhase === 1 || aktuellePhase === 2 || aktuellePhase === 3)) ? "w-96" : "w-64"} shrink-0 overflow-hidden flex flex-col transition-all duration-300`}>
-              {/* Beratung 1 Phase 1 = Versorgungslücken Guide */}
-              {isBeratung1 && aktuellePhase === 1 ? (
+              {/* Rechte Spalte: bei Erstgespräch Phase 3 = PhaseCard (Tipps), sonst Guides */}
+              {isErstgespraech && aktuellePhase === 3 ? (
+                <PhaseCard
+                  aktuellePhase={aktuellePhase}
+                  abgeschlosseneFragen={activeBeratung?.abgeschlossene_fragen || []}
+                  onFrageToggle={(frageId) => {
+                    const current = activeBeratung?.abgeschlossene_fragen || [];
+                    const updated = current.includes(frageId) ? current.filter((id) => id !== frageId) : [...current, frageId];
+                    handleUpdate({ abgeschlossene_fragen: updated });
+                  }}
+                  onWeiter={() => handlePhaseChange(Math.min(aktuellePhase + 1, phasen.length - 1))}
+                  onZurueck={() => handlePhaseChange(Math.max(aktuellePhase - 1, 0))}
+                  phasen={phasen}
+                  pflichtfragen={pflichtfragen}
+                />
+              ) : isBeratung1 && aktuellePhase === 1 ? (
                 <>
                   <div className="px-3 pt-2 pb-1">
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Versorgungslücken</p>
@@ -322,6 +346,7 @@ export default function Beratung() {
                   <VersorgungslueckenGuide />
                 </>
               ) : isBeratung1 && aktuellePhase === 2 ? (
+
                 /* Beratung 1 Phase 2 = Worst-Case Guide */
                 <>
                   <div className="px-3 pt-2 pb-1">
@@ -336,13 +361,6 @@ export default function Beratung() {
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Präsentations-Guide</p>
                   </div>
                   <ProduktPraesentationGuide />
-                </>
-              ) : isErstgespraech && aktuellePhase === 3 ? (
-                <>
-                  <div className="px-3 pt-2 pb-1">
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Rechner</p>
-                  </div>
-                  <EinnahmenAusgabenRechner />
                 </>
               ) : isErstgespraech && aktuellePhase === 4 ? (
                 /* Erstgespräch Phase 4 = Ziele Guide */
