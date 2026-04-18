@@ -15,7 +15,7 @@ const SCHRITTE = [
       "Bestätige nochmals das Hauptproblem, bevor du die Lösung nennst.",
     ],
     skript: [
-      "„Sie haben vorhin gesagt, dass Sie sich am meisten Sorgen machen, dass [Kundenaussage]."",
+      '„Sie haben vorhin gesagt, dass Sie sich am meisten Sorgen machen, dass [Kundenaussage]."',
       "„Genau dafür habe ich eine Lösung, die passt – darf ich Sie kurz vorstellen?"",
     ],
     tipp: "Wer die Brücke nicht baut, präsentiert ins Leere. Der Kunde muss sich selbst in der Lösung wiederfinden.",
