@@ -286,15 +286,17 @@ export default function Beratung() {
           <div className="flex-1 overflow-hidden flex flex-col">
             {/* Kundenbanner + Compliance */}
             <KundenInfoBanner beratung={activeBeratung} />
-            <ComplianceWarning
-              gespraechstyp={activeBeratung?.gespraechstyp}
-              abgeschlosseneFragen={activeBeratung?.abgeschlossene_fragen || []}
-              onFrageToggle={(frageId) => {
-                const current = activeBeratung?.abgeschlossene_fragen || [];
-                const updated = current.includes(frageId) ? current.filter((id) => id !== frageId) : [...current, frageId];
-                handleUpdate({ abgeschlossene_fragen: updated });
-              }}
-            />
+            {aktuellePhase === 0 && (
+              <ComplianceWarning
+                gespraechstyp={activeBeratung?.gespraechstyp}
+                abgeschlosseneFragen={activeBeratung?.abgeschlossene_fragen || []}
+                onFrageToggle={(frageId) => {
+                  const current = activeBeratung?.abgeschlossene_fragen || [];
+                  const updated = current.includes(frageId) ? current.filter((id) => id !== frageId) : [...current, frageId];
+                  handleUpdate({ abgeschlossene_fragen: updated });
+                }}
+              />
+            )}
             <div className="flex-1 overflow-hidden flex flex-row gap-0">
             {/* Linke Hauptspalte: bei Erstgespräch Phase 3 = Rechner, sonst PhaseCard */}
             {isErstgespraech && aktuellePhase === 3 ? (
