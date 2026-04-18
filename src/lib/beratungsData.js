@@ -60,8 +60,8 @@ export const PHASEN_BY_TYPE = {
     { id: 2, titel: "Persönliche Situation", kurz: "Person", beschreibung: "Familie, Beruf & Wohnsituation erfassen", tipps: ["Familienstand & Anzahl Kinder (inkl. Alter)", "Beruf, Arbeitgeber, Anstellung oder selbstständig?", "Eigentümer oder Mieter?", "Gibt es einen Partner mit eigenem Einkommen?", "Wie ist der Gesundheitszustand grob?"] },
     { id: 3, titel: "Finanzieller Überblick", kurz: "Finanzen", beschreibung: "Einnahmen & Ausgaben strukturiert erfassen", tipps: ["Nettoeinkommen monatlich erfragen", "Fixkosten (Miete, Kredite, laufende Verträge)", "Freies Budget nach Abzug aller Kosten", "Bestehende Versicherungen & monatliche Beiträge", "→ Rechner nutzen für klares Bild!"] },
     { id: 4, titel: "Ziele & Wünsche", kurz: "Ziele", beschreibung: "Was ist dem Kunden wirklich wichtig?", tipps: ["Keine Annahmen treffen – aktiv zuhören", "Offene Fragen stellen und Pausen aushalten", "Emotionale Themen notieren (Familie absichern, Rente, Freiheit)", "→ Ziele-Guide nutzen für strukturierte Fragen"] },
-    { id: 5, titel: "Interesse wecken", kurz: "Interesse", beschreibung: "Relevanz der Absicherung verdeutlichen", tipps: ["An genannte Ziele anknüpfen", "Eine konkrete Lücke benennen – ohne Druck", "Neugier für Beratung 1 wecken"] },
-    { id: 6, titel: "Nächster Termin", kurz: "Termin", beschreibung: "Beratung 1 vereinbaren", tipps: ["Konkreten Termin vorschlagen", "Ort und Format klären (persönlich/online)", "Kunden um Unterlagen bitten (Verträge etc.)"] },
+    { id: 5, titel: "Interesse herauskristallisieren", kurz: "Interesse", beschreibung: "Die wichtigsten Themen des Kunden herausarbeiten", tipps: ["Zusammenfassen: 'Was hat Sie heute am meisten beschäftigt?'", "Direkt fragen: 'Welches Thema war für Sie am wichtigsten – Sicherheit, Altersvorsorge oder etwas anderes?'", "Top 2–3 Kernthemen des Kunden laut notieren – diese bilden die Agenda der Beratung 1", "Rückmeldung geben: 'Genau darauf werden wir in der Beratung gezielt eingehen.'", "Keine Lösungen nennen – nur Interesse bestätigen und Spannung aufbauen"] },
+    { id: 6, titel: "Nächster Termin", kurz: "Termin", beschreibung: "Beratung 1 vereinbaren & Erwartungen klären", tipps: ["Konkreten Termin vorschlagen: 'Passt Ihnen Dienstag oder Donnerstag besser?'", "Erwartungen abfragen: 'Was erwarten Sie von unserer nächsten Sitzung – was soll danach für Sie klarer sein?'", "'Gibt es etwas, das Sie bei einem Berater besonders wichtig finden oder bisher vermisst haben?'", "Format klären (persönlich/online) und Ort bestätigen", "Kunden um Unterlagen bitten: bestehende Verträge, Gehaltsabrechnung, Rentenbescheid"] },
   ],
 
   beratung1: [
@@ -118,7 +118,11 @@ export const PFLICHTFRAGEN_BY_TYPE = {
     { id: "eg11", phase: 3, frage: "Bestehende Versicherungskosten notiert?" },
     { id: "eg12", phase: 4, frage: "Mind. 3 Ziele / Wünsche des Kunden notiert?" },
     { id: "eg13", phase: 4, frage: "Emotionalen Hauptbedarf identifiziert?" },
+    { id: "eg15", phase: 5, frage: "Top 2–3 Kernthemen des Kunden notiert?" },
+    { id: "eg16", phase: 5, frage: "Kunde bestätigt, dass diese Themen für Beratung 1 relevant sind?" },
     { id: "eg14", phase: 6, frage: "Nächster Termin (Beratung 1) vereinbart?" },
+    { id: "eg17", phase: 6, frage: "Erwartungen des Kunden an die Beratung abgefragt?" },
+    { id: "eg18", phase: 6, frage: "Benötigte Unterlagen kommuniziert?" },
   ],
   beratung1: [
     { id: "b1_1", phase: 1, frage: "Familienstand & Kinder?" },
