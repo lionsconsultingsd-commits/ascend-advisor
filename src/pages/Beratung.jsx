@@ -54,6 +54,31 @@ export default function Beratung() {
     base44.auth.me().then(setCurrentUser);
   }, []);
 
+  // Deep-Link: ?kontakt_id=xxx&typ=beratung1&name=Max+Muster
+  // or: ?beratung_id=xxx (open existing Beratung directly)
+  useEffect(() => {
+    if (!currentUser) return;
+    const params = new URLSearchParams(window.location.search);
+    const beratungId = params.get("beratung_id");
+    const kontaktId = params.get("kontakt_id");
+    const typ = params.get("typ") || "beratung1";
+    const name = params.get("name");
+
+    if (beratungId) {
+      // Open existing Beratung directly
+      setActiveBeratungId(beratungId);
+      setScreen("beratung");
+      setActiveTab("leitfaden");
+      // Clean URL
+      window.history.replaceState({}, "", window.location.pathname);
+    } else if (kontaktId && name) {
+      // Start new Beratung for this contact
+      handleStartBeratung(decodeURIComponent(name), null, kontaktId, typ);
+      // Clean URL
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, [currentUser]);
+
   const { data: beratungen = [] } = useQuery({
     queryKey: ["beratungen", currentUser?.email],
     queryFn: () =>
