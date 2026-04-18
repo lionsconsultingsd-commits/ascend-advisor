@@ -18,6 +18,7 @@ import SignaturePad from "@/components/beratung/SignaturePad";
 import CrosssellingGuide from "@/components/beratung/CrosssellingGuide";
 import EinnahmenAusgabenRechner from "@/components/beratung/EinnahmenAusgabenRechner";
 import ZieleGuide from "@/components/beratung/ZieleGuide";
+import VersorgungslueckenGuide from "@/components/beratung/VersorgungslueckenGuide";
 import ThemeToggle from "@/components/ThemeToggle";
 import { X, MoreVertical, CheckCircle } from "lucide-react";
 import {
@@ -159,6 +160,7 @@ export default function Beratung() {
   const isCrossselling = activeBeratung?.gespraechstyp === "crossselling";
   const isAbschluss = activeBeratung?.gespraechstyp === "abschlussgespraech";
   const isErstgespraech = activeBeratung?.gespraechstyp === "erstgespraech";
+  const isBeratung1 = activeBeratung?.gespraechstyp === "beratung1";
 
   // Tab-Labels je nach Gesprächstyp
   const tabLabel = {
@@ -248,9 +250,16 @@ export default function Beratung() {
               />
             </div>
             <div className="w-px bg-border shrink-0" />
-            <div className={`${isErstgespraech && (aktuellePhase === 3 || aktuellePhase === 4) ? "w-96" : "w-64"} shrink-0 overflow-hidden flex flex-col transition-all duration-300`}>
-              {/* Erstgespräch Phase 3 = Einnahmen/Ausgaben Rechner */}
-              {isErstgespraech && aktuellePhase === 3 ? (
+            <div className={`${(isErstgespraech && (aktuellePhase === 3 || aktuellePhase === 4)) || (isBeratung1 && aktuellePhase === 1) ? "w-96" : "w-64"} shrink-0 overflow-hidden flex flex-col transition-all duration-300`}>
+              {/* Beratung 1 Phase 1 = Versorgungslücken Guide */}
+              {isBeratung1 && aktuellePhase === 1 ? (
+                <>
+                  <div className="px-3 pt-2 pb-1">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Versorgungslücken</p>
+                  </div>
+                  <VersorgungslueckenGuide />
+                </>
+              ) : isErstgespraech && aktuellePhase === 3 ? (
                 <>
                   <div className="px-3 pt-2 pb-1">
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Rechner</p>
