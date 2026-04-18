@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { EINWAENDE } from "@/lib/beratungsData";
+import { EINWAENDE as EINWAENDE_DEFAULT } from "@/lib/beratungsData";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function EinwandPanel() {
+export default function EinwandPanel({ einwaende: einwaendeProp }) {
+  const einwaende = einwaendeProp || EINWAENDE_DEFAULT;
   const [selectedId, setSelectedId] = useState(null);
-  const selected = EINWAENDE.find((e) => e.id === selectedId);
+  const selected = einwaende.find((e) => e.id === selectedId);
 
   return (
     <div className="flex-1 overflow-y-auto px-4 pb-4">
@@ -23,7 +24,7 @@ export default function EinwandPanel() {
             <p className="text-sm text-muted-foreground mb-3">
               Wähle den Einwand des Kunden – erhalte sofort die passende Antwort.
             </p>
-            {EINWAENDE.map((e) => (
+            {einwaende.map((e) => (
               <button
                 key={e.id}
                 onClick={() => setSelectedId(e.id)}

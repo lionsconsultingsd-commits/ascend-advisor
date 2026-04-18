@@ -10,6 +10,18 @@
       "type": "string",
       "description": "ID des Kontakts in der UPL-App"
     },
+    "gespraechstyp": {
+      "type": "string",
+      "enum": [
+        "erstgespraech",
+        "beratung1",
+        "beratung2",
+        "abschlussgespraech",
+        "crossselling"
+      ],
+      "default": "beratung1",
+      "description": "Art des Gespr\u00e4chs"
+    },
     "datum": {
       "type": "string",
       "format": "date",
@@ -60,6 +72,10 @@
     "unterschrift_url": {
       "type": "string",
       "description": "URL der digitalen Unterschrift des Kunden"
+    },
+    "unterschrift_berater_url": {
+      "type": "string",
+      "description": "URL der digitalen Unterschrift des Beraters"
     }
   },
   "required": [

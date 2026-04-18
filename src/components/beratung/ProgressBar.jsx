@@ -3,8 +3,9 @@ import { PHASEN } from "@/lib/beratungsData";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 
-export default function ProgressBar({ aktuellePhase, onPhaseClick }) {
-  const progress = ((aktuellePhase + 1) / PHASEN.length) * 100;
+export default function ProgressBar({ aktuellePhase, onPhaseClick, phasen: phasenProp }) {
+  const phasen = phasenProp || PHASEN;
+  const progress = ((aktuellePhase + 1) / phasen.length) * 100;
 
   return (
     <div className="px-4 py-3">
@@ -18,7 +19,7 @@ export default function ProgressBar({ aktuellePhase, onPhaseClick }) {
 
       {/* Phase dots */}
       <div className="flex justify-between items-center">
-        {PHASEN.map((phase) => {
+        {phasen.map((phase) => {
           const isDone = phase.id < aktuellePhase;
           const isCurrent = phase.id === aktuellePhase;
 

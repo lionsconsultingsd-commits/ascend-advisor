@@ -12,11 +12,15 @@ export default function PhaseCard({
   onFrageToggle,
   onWeiter,
   onZurueck,
+  phasen: phasenProp,
+  pflichtfragen: pflichtfragenProp,
 }) {
-  const phase = PHASEN[aktuellePhase];
-  const fragen = PFLICHTFRAGEN.filter((f) => f.phase === aktuellePhase);
+  const phasen = phasenProp || PHASEN;
+  const pflichtfragen = pflichtfragenProp || PFLICHTFRAGEN;
+  const phase = phasen[aktuellePhase];
+  const fragen = pflichtfragen.filter((f) => f.phase === aktuellePhase);
   const isFirst = aktuellePhase === 0;
-  const isLast = aktuellePhase === PHASEN.length - 1;
+  const isLast = aktuellePhase === phasen.length - 1;
 
   return (
     <AnimatePresence mode="wait">
@@ -32,7 +36,7 @@ export default function PhaseCard({
         <div className="bg-card rounded-2xl p-5 shadow-sm border mb-4">
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
-              Phase {aktuellePhase + 1}/{PHASEN.length}
+              Phase {aktuellePhase + 1}/{phasen.length}
             </span>
           </div>
           <h2 className="text-xl font-bold text-foreground mb-1">{phase.titel}</h2>
