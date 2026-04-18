@@ -104,63 +104,127 @@ export const PHASEN = PHASEN_BY_TYPE.beratung1;
 // PFLICHTFRAGEN PRO GESPRÄCHSTYP
 // ============================================================
 export const PFLICHTFRAGEN_BY_TYPE = {
+  // ── Erstgespräch (7 Phasen: 0–6) ─────────────────────────
   erstgespraech: [
-    { id: "eg1", phase: 0, frage: "Begrüßung & Vorstellung abgeschlossen?" },
-    { id: "eg2", phase: 1, frage: "Datenschutzeinwilligung eingeholt?" },
-    { id: "eg3", phase: 1, frage: "Kontaktdaten vollständig erfasst?" },
-    { id: "eg4", phase: 2, frage: "Familienstand & Kinder (inkl. Alter) erfasst?" },
-    { id: "eg5", phase: 2, frage: "Beruf & Arbeitgeber notiert?" },
-    { id: "eg6", phase: 2, frage: "Eigentümer oder Mieter?" },
-    { id: "eg7", phase: 2, frage: "Partner mit eigenem Einkommen?" },
-    { id: "eg8", phase: 3, frage: "Nettoeinkommen erfasst?" },
-    { id: "eg9", phase: 3, frage: "Fixkosten & Ausgaben erfasst?" },
-    { id: "eg10", phase: 3, frage: "Freies Budget ermittelt?" },
-    { id: "eg11", phase: 3, frage: "Bestehende Versicherungskosten notiert?" },
-    { id: "eg12", phase: 4, frage: "Mind. 3 Ziele / Wünsche des Kunden notiert?" },
-    { id: "eg13", phase: 4, frage: "Emotionalen Hauptbedarf identifiziert?" },
-    { id: "eg15", phase: 5, frage: "Top 2–3 Kernthemen des Kunden notiert?" },
-    { id: "eg16", phase: 5, frage: "Kunde bestätigt, dass diese Themen für Beratung 1 relevant sind?" },
-    { id: "eg14", phase: 6, frage: "Nächster Termin (Beratung 1) vereinbart?" },
-    { id: "eg17", phase: 6, frage: "Erwartungen des Kunden an die Beratung abgefragt?" },
-    { id: "eg18", phase: 6, frage: "Benötigte Unterlagen kommuniziert?" },
+    // Phase 0: Begrüßung & Vertrauen
+    { id: "eg1", phase: 0, frage: "Herzliche Begrüßung & Vorstellung abgeschlossen?" },
+    { id: "eg2", phase: 0, frage: "Angenehme Atmosphäre geschaffen (Getränk, Sitz)?" },
+    // Phase 1: Datenschutz & Einwilligung
+    { id: "eg3", phase: 1, frage: "Datenschutzerklärung vorgelegt & erläutert?" },
+    { id: "eg4", phase: 1, frage: "Einwilligung zur Kontaktaufnahme eingeholt?" },
+    { id: "eg5", phase: 1, frage: "Kontaktdaten (Telefon, E-Mail) vollständig erfasst?" },
+    // Phase 2: Persönliche Situation
+    { id: "eg6", phase: 2, frage: "Familienstand & Kinder (inkl. Alter) erfasst?" },
+    { id: "eg7", phase: 2, frage: "Beruf, Arbeitgeber & Anstellungsart notiert?" },
+    { id: "eg8", phase: 2, frage: "Eigentümer oder Mieter geklärt?" },
+    { id: "eg9", phase: 2, frage: "Partner / eigenes Einkommen des Partners erfasst?" },
+    // Phase 3: Finanzieller Überblick (Rechner)
+    { id: "eg10", phase: 3, frage: "Nettoeinkommen (alle Quellen) erfasst?" },
+    { id: "eg11", phase: 3, frage: "Fixkosten (Miete, Kredite, Verträge) erfasst?" },
+    { id: "eg12", phase: 3, frage: "Freies Budget mit Rechner ermittelt?" },
+    { id: "eg13", phase: 3, frage: "Bestehende Versicherungen & Monatsbeiträge notiert?" },
+    // Phase 4: Ziele & Wünsche (Ziele-Guide)
+    { id: "eg14", phase: 4, frage: "Mind. 3 konkrete Ziele / Wünsche des Kunden notiert?" },
+    { id: "eg15", phase: 4, frage: "Emotionalen Hauptbedarf (Familie, Freiheit, Sicherheit) identifiziert?" },
+    { id: "eg16", phase: 4, frage: "Ziele-Guide für strukturierte Fragen genutzt?" },
+    // Phase 5: Interesse herauskristallisieren
+    { id: "eg17", phase: 5, frage: "Top 2–3 Kernthemen des Kunden klar herausgearbeitet?" },
+    { id: "eg18", phase: 5, frage: "Kunde hat Themen als relevant für Beratung 1 bestätigt?" },
+    { id: "eg19", phase: 5, frage: "Kernthemen notiert & als Agenda für Beratung 1 festgehalten?" },
+    // Phase 6: Nächster Termin
+    { id: "eg20", phase: 6, frage: "Konkreten Termin für Beratung 1 vereinbart?" },
+    { id: "eg21", phase: 6, frage: "Erwartungen des Kunden an die Beratung abgefragt?" },
+    { id: "eg22", phase: 6, frage: "Format & Ort des nächsten Termins geklärt?" },
+    { id: "eg23", phase: 6, frage: "Benötigte Unterlagen kommuniziert (Verträge, Gehaltsnachweis)?" },
   ],
+
+  // ── Beratung 1 (6 Phasen: 0–5) ───────────────────────────
   beratung1: [
-    { id: "b1_1", phase: 1, frage: "Familienstand & Kinder?" },
-    { id: "b1_2", phase: 1, frage: "Beruf & Einkommen?" },
-    { id: "b1_3", phase: 1, frage: "Bestehende Versicherungen?" },
-    { id: "b1_4", phase: 1, frage: "Welche Ziele & Wünsche hat der Kunde?" },
-    { id: "b1_5", phase: 2, frage: "Gesundheitszustand & Vorerkrankungen?" },
-    { id: "b1_6", phase: 2, frage: "Hobbys mit erhöhtem Risiko?" },
-    { id: "b1_7", phase: 2, frage: "Was passiert bei Berufsunfähigkeit?" },
-    { id: "b1_8", phase: 2, frage: "Haftpflichtrisiken besprochen?" },
-    { id: "b1_9", phase: 3, frage: "Budget des Kunden geklärt?" },
-    { id: "b1_10", phase: 3, frage: "Leistungsunterschiede erklärt?" },
-    { id: "b1_11", phase: 5, frage: "Offene Punkte für Beratung 2 notiert?" },
-    { id: "b1_12", phase: 5, frage: "Termin Beratung 2 vereinbart?" },
+    // Phase 0: Begrüßung & Rückblick
+    { id: "b1_1", phase: 0, frage: "Kurzes Recap des Erstgesprächs gemacht?" },
+    { id: "b1_2", phase: 0, frage: "Offene Fragen des Kunden seit letztem Termin geklärt?" },
+    { id: "b1_3", phase: 0, frage: "Agenda für heute vorgestellt?" },
+    // Phase 1: Tiefe Bedarfsanalyse (Versorgungslücken-Guide)
+    { id: "b1_4", phase: 1, frage: "Versorgungslücken-Guide für alle Bereiche durchgegangen?" },
+    { id: "b1_5", phase: 1, frage: "Bereiche mit Lücke klar identifiziert & markiert?" },
+    { id: "b1_6", phase: 1, frage: "Bestehende Verträge des Kunden geprüft?" },
+    { id: "b1_7", phase: 1, frage: "Prioritäten des Kunden (welche Lücke ist dringlichste?) festgehalten?" },
+    // Phase 2: Risikoanalyse
+    { id: "b1_8", phase: 2, frage: "Gesundheitszustand & Vorerkrankungen sensibel erfragt?" },
+    { id: "b1_9", phase: 2, frage: "Hobbys / Berufsrisiken mit erhöhtem Unfallrisiko erfasst?" },
+    { id: "b1_10", phase: 2, frage: "Worst-Case Szenario (BU, Tod, Pflege) mit Kunden durchgedacht?" },
+    // Phase 3: Produktpräsentation
+    { id: "b1_11", phase: 3, frage: "Max. 2–3 passende Lösungen vorgestellt?" },
+    { id: "b1_12", phase: 3, frage: "Nutzen (nicht Features) für den Kunden erklärt?" },
+    { id: "b1_13", phase: 3, frage: "Budget des Kunden mit Angeboten abgeglichen?" },
+    // Phase 4: Einwandbehandlung
+    { id: "b1_14", phase: 4, frage: "Einwände des Kunden aktiv erfragt?" },
+    { id: "b1_15", phase: 4, frage: "Einwand-Leitfaden genutzt?" },
+    // Phase 5: Zusammenfassung & Ausblick
+    { id: "b1_16", phase: 5, frage: "Kunden Zusammenfassung selbst formulieren lassen?" },
+    { id: "b1_17", phase: 5, frage: "Offene Punkte für Beratung 2 schriftlich notiert?" },
+    { id: "b1_18", phase: 5, frage: "Termin für Beratung 2 vereinbart?" },
   ],
+
+  // ── Beratung 2 (5 Phasen: 0–4) ───────────────────────────
   beratung2: [
-    { id: "b2_1", phase: 0, frage: "Alle offenen Fragen aus Beratung 1 besprochen?" },
-    { id: "b2_2", phase: 1, frage: "Unterlagen des Kunden geprüft?" },
-    { id: "b2_3", phase: 2, frage: "Budget final bestätigt?" },
-    { id: "b2_4", phase: 2, frage: "Konkretes Angebot vorgestellt?" },
-    { id: "b2_5", phase: 4, frage: "Termin Abschlussgespräch vereinbart?" },
+    // Phase 0: Rückblick Beratung 1
+    { id: "b2_1", phase: 0, frage: "Alle offenen Punkte aus Beratung 1 aufgegriffen?" },
+    { id: "b2_2", phase: 0, frage: "Rückfragen des Kunden seit letztem Termin geklärt?" },
+    // Phase 1: Offene Fragen klären
+    { id: "b2_3", phase: 1, frage: "Unterlagen des Kunden geprüft & einbezogen?" },
+    { id: "b2_4", phase: 1, frage: "Alle Unklarheiten aus Beratung 1 ausgeräumt?" },
+    // Phase 2: Angebot verfeinern
+    { id: "b2_5", phase: 2, frage: "Budget nochmals bestätigt?" },
+    { id: "b2_6", phase: 2, frage: "Konkretes, finales Angebot vorgestellt?" },
+    { id: "b2_7", phase: 2, frage: "Vertragskonditionen verständlich erklärt?" },
+    // Phase 3: Finale Einwände
+    { id: "b2_8", phase: 3, frage: "Aktiv nach letzten Bedenken gefragt?" },
+    { id: "b2_9", phase: 3, frage: "Einwand-Leitfaden genutzt (falls nötig)?" },
+    // Phase 4: Entscheidung vorbereiten
+    { id: "b2_10", phase: 4, frage: "Gesamtzusammenfassung gegeben?" },
+    { id: "b2_11", phase: 4, frage: "Termin für Abschlussgespräch vereinbart?" },
+    { id: "b2_12", phase: 4, frage: "Partner / Entscheider für Abschluss eingeladen (falls relevant)?" },
   ],
+
+  // ── Abschlussgespräch (4 Phasen: 0–3) ────────────────────
   abschlussgespraech: [
+    // Phase 0: Finale Bestätigung
     { id: "ag1", phase: 0, frage: "Alle Konditionen nochmals zusammengefasst?" },
-    { id: "ag2", phase: 1, frage: "Antrag vollständig ausgefüllt?" },
-    { id: "ag3", phase: 1, frage: "Gesundheitsfragen korrekt beantwortet?" },
-    { id: "ag4", phase: 1, frage: "Unterschrift des Kunden eingeholt?" },
-    { id: "ag5", phase: 2, frage: "Beratungsprotokoll vollständig?" },
-    { id: "ag6", phase: 2, frage: "Unterschrift Berater & Kunde auf Protokoll?" },
-    { id: "ag7", phase: 3, frage: "Widerrufsrecht (14 Tage) erklärt?" },
-    { id: "ag8", phase: 3, frage: "Empfehlungsfrage gestellt?" },
+    { id: "ag2", phase: 0, frage: "Letzte Fragen des Kunden beantwortet?" },
+    // Phase 1: Vertragsunterzeichnung
+    { id: "ag3", phase: 1, frage: "Antrag gemeinsam vollständig ausgefüllt?" },
+    { id: "ag4", phase: 1, frage: "Gesundheitsfragen korrekt & vollständig beantwortet?" },
+    { id: "ag5", phase: 1, frage: "Unterschrift des Kunden auf dem Antrag eingeholt?" },
+    // Phase 2: Beratungsdokumentation
+    { id: "ag6", phase: 2, frage: "KI-Protokoll erstellt oder manuell dokumentiert?" },
+    { id: "ag7", phase: 2, frage: "Unterschrift Berater auf Protokoll?" },
+    { id: "ag8", phase: 2, frage: "Unterschrift Kunde auf Protokoll?" },
+    // Phase 3: Widerrufsrecht & Ausblick
+    { id: "ag9", phase: 3, frage: "Widerrufsrecht (14 Tage) klar erklärt?" },
+    { id: "ag10", phase: 3, frage: "Nächste Schritte kommuniziert (Police, Beitragseinzug)?" },
+    { id: "ag11", phase: 3, frage: "Empfehlungsfrage gestellt?" },
   ],
+
+  // ── Crossselling (5 Phasen: 0–4) ─────────────────────────
   crossselling: [
-    { id: "cs1", phase: 0, frage: "Zufriedenheit mit bestehendem Vertrag geprüft?" },
-    { id: "cs2", phase: 1, frage: "Lebenssituation auf Änderungen geprüft?" },
-    { id: "cs3", phase: 2, frage: "Zusatzprodukt erklärt & Nutzen dargestellt?" },
-    { id: "cs4", phase: 4, frage: "Antrag für Zusatzprodukt ausgefüllt?" },
-    { id: "cs5", phase: 4, frage: "Dokumentation erstellt & unterschrieben?" },
+    // Phase 0: Beziehungscheck
+    { id: "cs1", phase: 0, frage: "Zufriedenheit mit bestehendem Vertrag erfragt?" },
+    { id: "cs2", phase: 0, frage: "Positive Rückmeldung / Feedback eingeholt?" },
+    // Phase 1: Zusatzbedarf identifizieren
+    { id: "cs3", phase: 1, frage: "Änderungen in der Lebenssituation geprüft?" },
+    { id: "cs4", phase: 1, frage: "Crossselling-Checkliste (alle Bereiche) durchgegangen?" },
+    { id: "cs5", phase: 1, frage: "Konkreten Zusatzbedarf identifiziert & notiert?" },
+    // Phase 2: Produkt platzieren
+    { id: "cs6", phase: 2, frage: "Zusatzprodukt kurz & klar erklärt?" },
+    { id: "cs7", phase: 2, frage: "Direkten Nutzen für diesen Kunden aufgezeigt?" },
+    // Phase 3: Einwände Crossselling
+    { id: "cs8", phase: 3, frage: "Einwände aktiv erfragt?" },
+    { id: "cs9", phase: 3, frage: "Crossselling-Einwand-Leitfaden genutzt (falls nötig)?" },
+    // Phase 4: Abschluss & Dokumentation
+    { id: "cs10", phase: 4, frage: "Antrag für Zusatzprodukt ausgefüllt?" },
+    { id: "cs11", phase: 4, frage: "Unterschrift des Kunden eingeholt?" },
+    { id: "cs12", phase: 4, frage: "Dokumentation / Protokoll erstellt?" },
   ],
 };
 
