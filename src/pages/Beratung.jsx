@@ -16,6 +16,8 @@ import ProtokollTabs from "@/components/beratung/ProtokollTabs";
 import DoppelUnterschrift from "@/components/beratung/DoppelUnterschrift";
 import SignaturePad from "@/components/beratung/SignaturePad";
 import CrosssellingGuide from "@/components/beratung/CrosssellingGuide";
+import EinnahmenAusgabenRechner from "@/components/beratung/EinnahmenAusgabenRechner";
+import ZieleGuide from "@/components/beratung/ZieleGuide";
 import ThemeToggle from "@/components/ThemeToggle";
 import { X, MoreVertical, CheckCircle } from "lucide-react";
 import {
@@ -156,6 +158,7 @@ export default function Beratung() {
   const aktuellePhase = activeBeratung?.aktuelle_phase || 0;
   const isCrossselling = activeBeratung?.gespraechstyp === "crossselling";
   const isAbschluss = activeBeratung?.gespraechstyp === "abschlussgespraech";
+  const isErstgespraech = activeBeratung?.gespraechstyp === "erstgespraech";
 
   // Tab-Labels je nach Gesprächstyp
   const tabLabel = {
@@ -246,10 +249,30 @@ export default function Beratung() {
             </div>
             <div className="w-px bg-border shrink-0" />
             <div className="w-64 shrink-0 overflow-hidden flex flex-col">
-              <div className="px-3 pt-2 pb-1">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Notizen</p>
-              </div>
-              <NotizenPanel notizen={activeBeratung?.notizen} onSave={(text) => handleUpdate({ notizen: text })} compact />
+              {/* Erstgespräch Phase 3 = Einnahmen/Ausgaben Rechner */}
+              {isErstgespraech && aktuellePhase === 3 ? (
+                <>
+                  <div className="px-3 pt-2 pb-1">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Rechner</p>
+                  </div>
+                  <EinnahmenAusgabenRechner />
+                </>
+              ) : isErstgespraech && aktuellePhase === 4 ? (
+                /* Erstgespräch Phase 4 = Ziele Guide */
+                <>
+                  <div className="px-3 pt-2 pb-1">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Ziele-Guide</p>
+                  </div>
+                  <ZieleGuide />
+                </>
+              ) : (
+                <>
+                  <div className="px-3 pt-2 pb-1">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Notizen</p>
+                  </div>
+                  <NotizenPanel notizen={activeBeratung?.notizen} onSave={(text) => handleUpdate({ notizen: text })} compact />
+                </>
+              )}
             </div>
           </div>
         )}

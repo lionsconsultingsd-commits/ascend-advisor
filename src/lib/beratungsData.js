@@ -56,10 +56,12 @@ export const GESPRAECHSTYPEN = [
 export const PHASEN_BY_TYPE = {
   erstgespraech: [
     { id: 0, titel: "Begrüßung & Vertrauen", kurz: "Begrüßung", beschreibung: "Ersten guten Eindruck hinterlassen", tipps: ["Herzlich willkommen heißen", "Sich vorstellen und Agentur vorstellen", "Getränk anbieten", "Entspannte Atmosphäre schaffen"] },
-    { id: 1, titel: "Datenschutz & Einwilligung", kurz: "Datenschutz", beschreibung: "Rechtliche Grundlage schaffen", tipps: ["Datenschutzerklärung vorlegen", "Einwilligung zur Kontaktaufnahme einholen", "Courageously erklären was gespeichert wird"] },
-    { id: 2, titel: "Erste Bedarfsaufnahme", kurz: "Bedarf", beschreibung: "Grundlegende Lebenssituation erfassen", tipps: ["Familienstand & Kinder erfragen", "Beruf und Arbeitgeber notieren", "Grobe Einkommenssituation erfassen"] },
-    { id: 3, titel: "Interesse wecken", kurz: "Interesse", beschreibung: "Relevanz der Absicherung verdeutlichen", tipps: ["Kurze Situation schildern – ohne zu verkaufen", "Auf einen wichtigsten Punkt fokussieren", "Neugier für Beratung 1 wecken"] },
-    { id: 4, titel: "Nächster Termin", kurz: "Termin", beschreibung: "Beratung 1 vereinbaren", tipps: ["Konkreten Termin vorschlagen", "Ort und Format klären (persönlich/online)", "Kunden um Unterlagen bitten (Verträge etc.)"] },
+    { id: 1, titel: "Datenschutz & Einwilligung", kurz: "Datenschutz", beschreibung: "Rechtliche Grundlage schaffen", tipps: ["Datenschutzerklärung vorlegen", "Einwilligung zur Kontaktaufnahme einholen", "Erklären was gespeichert wird"] },
+    { id: 2, titel: "Persönliche Situation", kurz: "Person", beschreibung: "Familie, Beruf & Wohnsituation erfassen", tipps: ["Familienstand & Anzahl Kinder (inkl. Alter)", "Beruf, Arbeitgeber, Anstellung oder selbstständig?", "Eigentümer oder Mieter?", "Gibt es einen Partner mit eigenem Einkommen?", "Wie ist der Gesundheitszustand grob?"] },
+    { id: 3, titel: "Finanzieller Überblick", kurz: "Finanzen", beschreibung: "Einnahmen & Ausgaben strukturiert erfassen", tipps: ["Nettoeinkommen monatlich erfragen", "Fixkosten (Miete, Kredite, laufende Verträge)", "Freies Budget nach Abzug aller Kosten", "Bestehende Versicherungen & monatliche Beiträge", "→ Rechner nutzen für klares Bild!"] },
+    { id: 4, titel: "Ziele & Wünsche", kurz: "Ziele", beschreibung: "Was ist dem Kunden wirklich wichtig?", tipps: ["Keine Annahmen treffen – aktiv zuhören", "Offene Fragen stellen und Pausen aushalten", "Emotionale Themen notieren (Familie absichern, Rente, Freiheit)", "→ Ziele-Guide nutzen für strukturierte Fragen"] },
+    { id: 5, titel: "Interesse wecken", kurz: "Interesse", beschreibung: "Relevanz der Absicherung verdeutlichen", tipps: ["An genannte Ziele anknüpfen", "Eine konkrete Lücke benennen – ohne Druck", "Neugier für Beratung 1 wecken"] },
+    { id: 6, titel: "Nächster Termin", kurz: "Termin", beschreibung: "Beratung 1 vereinbaren", tipps: ["Konkreten Termin vorschlagen", "Ort und Format klären (persönlich/online)", "Kunden um Unterlagen bitten (Verträge etc.)"] },
   ],
 
   beratung1: [
@@ -106,9 +108,17 @@ export const PFLICHTFRAGEN_BY_TYPE = {
     { id: "eg1", phase: 0, frage: "Begrüßung & Vorstellung abgeschlossen?" },
     { id: "eg2", phase: 1, frage: "Datenschutzeinwilligung eingeholt?" },
     { id: "eg3", phase: 1, frage: "Kontaktdaten vollständig erfasst?" },
-    { id: "eg4", phase: 2, frage: "Familienstand & Kinder erfasst?" },
+    { id: "eg4", phase: 2, frage: "Familienstand & Kinder (inkl. Alter) erfasst?" },
     { id: "eg5", phase: 2, frage: "Beruf & Arbeitgeber notiert?" },
-    { id: "eg6", phase: 4, frage: "Nächster Termin (Beratung 1) vereinbart?" },
+    { id: "eg6", phase: 2, frage: "Eigentümer oder Mieter?" },
+    { id: "eg7", phase: 2, frage: "Partner mit eigenem Einkommen?" },
+    { id: "eg8", phase: 3, frage: "Nettoeinkommen erfasst?" },
+    { id: "eg9", phase: 3, frage: "Fixkosten & Ausgaben erfasst?" },
+    { id: "eg10", phase: 3, frage: "Freies Budget ermittelt?" },
+    { id: "eg11", phase: 3, frage: "Bestehende Versicherungskosten notiert?" },
+    { id: "eg12", phase: 4, frage: "Mind. 3 Ziele / Wünsche des Kunden notiert?" },
+    { id: "eg13", phase: 4, frage: "Emotionalen Hauptbedarf identifiziert?" },
+    { id: "eg14", phase: 6, frage: "Nächster Termin (Beratung 1) vereinbart?" },
   ],
   beratung1: [
     { id: "b1_1", phase: 1, frage: "Familienstand & Kinder?" },
