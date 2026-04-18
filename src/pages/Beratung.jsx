@@ -20,6 +20,7 @@ import EinnahmenAusgabenRechner from "@/components/beratung/EinnahmenAusgabenRec
 import ZieleGuide from "@/components/beratung/ZieleGuide";
 import VersorgungslueckenGuide from "@/components/beratung/VersorgungslueckenGuide";
 import WorstCaseGuide from "@/components/beratung/WorstCaseGuide";
+import ProduktPraesentationGuide from "@/components/beratung/ProduktPraesentationGuide";
 import ThemeToggle from "@/components/ThemeToggle";
 import { X, MoreVertical, CheckCircle } from "lucide-react";
 import {
@@ -251,7 +252,7 @@ export default function Beratung() {
               />
             </div>
             <div className="w-px bg-border shrink-0" />
-            <div className={`${(isErstgespraech && (aktuellePhase === 3 || aktuellePhase === 4)) || (isBeratung1 && (aktuellePhase === 1 || aktuellePhase === 2)) ? "w-96" : "w-64"} shrink-0 overflow-hidden flex flex-col transition-all duration-300`}>
+            <div className={`${(isErstgespraech && (aktuellePhase === 3 || aktuellePhase === 4)) || (isBeratung1 && (aktuellePhase === 1 || aktuellePhase === 2 || aktuellePhase === 3)) ? "w-96" : "w-64"} shrink-0 overflow-hidden flex flex-col transition-all duration-300`}>
               {/* Beratung 1 Phase 1 = Versorgungslücken Guide */}
               {isBeratung1 && aktuellePhase === 1 ? (
                 <>
@@ -267,6 +268,14 @@ export default function Beratung() {
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Worst-Case Szenarien</p>
                   </div>
                   <WorstCaseGuide />
+                </>
+              ) : isBeratung1 && aktuellePhase === 3 ? (
+                /* Beratung 1 Phase 3 = Produktpräsentation Guide */
+                <>
+                  <div className="px-3 pt-2 pb-1">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Präsentations-Guide</p>
+                  </div>
+                  <ProduktPraesentationGuide />
                 </>
               ) : isErstgespraech && aktuellePhase === 3 ? (
                 <>
