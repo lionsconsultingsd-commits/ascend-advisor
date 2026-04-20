@@ -54,54 +54,41 @@ export default function Beratung() {
   useSavedTheme();
 
   useEffect(() => {
-    // Zugang nur erlauben wenn von UPL aus geöffnet (Deep-Link Parameter vorhanden)
     const params = new URLSearchParams(window.location.search);
     const hatUplParam = params.has("kontakt_id") || params.has("beratung_id") || params.has("upl_access");
     const hatSessionFlag = sessionStorage.getItem("upl_access") === "1";
 
-    if (hatUplParam) {
-      sessionStorage.setItem("upl_access", "1");
-      setUplZugang(true);
-    } else if (hatSessionFlag) {
-      setUplZugang(true);
-    } else {
-      // Admin-Bypass: Admins können die App immer bearbeiten
-      base44.auth.me().then((u) => {
-        if (u?.role === "admin") {
-          setUplZugang(true);
-        } else {
-          setUplZugang(false);
-        }
-      });
-    }
+    base44.auth.me().then((u) => {
+      setCurrentUser(u);
 
-    base44.auth.me().then(setCurrentUser);
+      if (hatUplParam) {
+        sessionStorage.setItem("upl_access", "1");
+        setUplZugang(true);
+      } else if (hatSessionFlag) {
+        setUplZugang(true);
+      } else if (u?.role === "admin") {
+        setUplZugang(true);
+      } else {
+        setUplZugang(false);
+      }
+
+      // Deep-Link verarbeiten sobald User bekannt
+      const beratungId = params.get("beratung_id");
+      const kontaktId = params.get("kontakt_id");
+      const typ = params.get("typ") || "beratung1";
+      const name = params.get("name");
+
+      if (beratungId) {
+        setActiveBeratungId(beratungId);
+        setScreen("beratung");
+        setActiveTab("leitfaden");
+        window.history.replaceState({}, "", window.location.pathname);
+      } else if (kontaktId && name) {
+        handleStartBeratung(decodeURIComponent(name), null, kontaktId, typ);
+        window.history.replaceState({}, "", window.location.pathname);
+      }
+    });
   }, []);
-
-  // Deep-Link: ?kontakt_id=xxx&typ=beratung1&name=Max+Muster
-  // or: ?beratung_id=xxx (open existing Beratung directly)
-  useEffect(() => {
-    if (!currentUser) return;
-    const params = new URLSearchParams(window.location.search);
-    const beratungId = params.get("beratung_id");
-    const kontaktId = params.get("kontakt_id");
-    const typ = params.get("typ") || "beratung1";
-    const name = params.get("name");
-
-    if (beratungId) {
-      // Open existing Beratung directly
-      setActiveBeratungId(beratungId);
-      setScreen("beratung");
-      setActiveTab("leitfaden");
-      // Clean URL
-      window.history.replaceState({}, "", window.location.pathname);
-    } else if (kontaktId && name) {
-      // Start new Beratung for this contact
-      handleStartBeratung(decodeURIComponent(name), null, kontaktId, typ);
-      // Clean URL
-      window.history.replaceState({}, "", window.location.pathname);
-    }
-  }, [currentUser]);
 
   const { data: beratungen = [] } = useQuery({
     queryKey: ["beratungen", currentUser?.email],
