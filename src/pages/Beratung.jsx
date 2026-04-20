@@ -21,7 +21,7 @@ import ZieleGuide from "@/components/beratung/ZieleGuide";
 import VersorgungslueckenGuide from "@/components/beratung/VersorgungslueckenGuide";
 import WorstCaseGuide from "@/components/beratung/WorstCaseGuide";
 import ProduktPraesentationGuide from "@/components/beratung/ProduktPraesentationGuide";
-import EmpfehlungPanel from "@/components/beratung/EmpfehlungPanel";
+import EmpfehlungGuide from "@/components/beratung/EmpfehlungGuide";
 import KundenInfoBanner from "@/components/beratung/KundenInfoBanner";
 import ComplianceWarning, { COMPLIANCE_FRAGEN } from "@/components/beratung/ComplianceWarning";
 import UplStatusSync from "@/components/beratung/UplStatusSync";
@@ -350,7 +350,7 @@ export default function Beratung() {
               </div>
             )}
             <div className="w-px bg-border shrink-0" />
-            <div className={`${(isErstgespraech && (aktuellePhase === 3 || aktuellePhase === 4)) || (isBeratung1 && (aktuellePhase === 1 || aktuellePhase === 2 || aktuellePhase === 3)) ? "w-96" : "w-64"} shrink-0 overflow-hidden flex flex-col transition-all duration-300`}>
+            <div className={`${(isErstgespraech && (aktuellePhase === 3 || aktuellePhase === 4)) || (isBeratung1 && (aktuellePhase === 1 || aktuellePhase === 2 || aktuellePhase === 3)) || (isAbschluss && aktuellePhase === 3) ? "w-96" : "w-64"} shrink-0 overflow-hidden flex flex-col transition-all duration-300`}>
               {/* Rechte Spalte: bei Erstgespräch Phase 3 = PhaseCard (Tipps), sonst Guides */}
               {isErstgespraech && aktuellePhase === 3 ? (
                 <PhaseCard
@@ -404,9 +404,7 @@ export default function Beratung() {
                   <div className="px-3 pt-2 pb-1">
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Empfehlungsnahme</p>
                   </div>
-                  <div className="flex-1 overflow-y-auto px-4 pb-4">
-                    <EmpfehlungPanel beratung={activeBeratung} />
-                  </div>
+                  <EmpfehlungGuide beratung={activeBeratung} />
                 </>
               ) : (
                 <>
