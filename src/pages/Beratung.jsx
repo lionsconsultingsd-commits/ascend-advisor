@@ -65,7 +65,14 @@ export default function Beratung() {
     } else if (hatSessionFlag) {
       setUplZugang(true);
     } else {
-      setUplZugang(false);
+      // Admin-Bypass: Admins können die App immer bearbeiten
+      base44.auth.me().then((u) => {
+        if (u?.role === "admin") {
+          setUplZugang(true);
+        } else {
+          setUplZugang(false);
+        }
+      });
     }
 
     base44.auth.me().then(setCurrentUser);
