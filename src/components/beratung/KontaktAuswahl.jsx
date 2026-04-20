@@ -15,14 +15,9 @@ export default function KontaktAuswahl({ gespraechstyp, onStart, onBack }) {
     setLoading(true);
     try {
       const user = await base44.auth.me();
+      if (!user) { setKontakte([]); return; }
       const lokal = await base44.entities.Kontakt.filter({ berater_email: user.email }, "last_name", 200);
-      if (lokal && lokal.length > 0) {
-        setKontakte(lokal);
-      } else {
-        // Fallback: direkt aus UPL laden
-        const res = await base44.functions.invoke("uplGetKontakte", {});
-        setKontakte(res.data?.kontakte || []);
-      }
+      setKontakte(lokal || []);
     } catch {
       setKontakte([]);
     } finally {
