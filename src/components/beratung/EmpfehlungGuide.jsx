@@ -41,11 +41,11 @@ const GUIDE_SCHRITTE = [
     skript: [
       {
         label: "Überleitung nach Abschluss",
-        text: "„Herr/Frau [Name], ich freue mich wirklich, dass wir heute eine gute Lösung für Sie gefunden haben. Genau das ist es, wofür ich jeden Tag arbeite."",
+        text: '„Herr/Frau [Name], ich freue mich wirklich, dass wir heute eine gute Lösung für Sie gefunden haben. Genau das ist es, wofür ich jeden Tag arbeite."',
       },
       {
         label: "Brücke zur Empfehlung",
-        text: "„Darf ich Sie noch etwas fragen – ganz unverbindlich?"",
+        text: '„Darf ich Sie noch etwas fragen – ganz unverbindlich?"',
       },
     ],
   },
@@ -68,15 +68,15 @@ const GUIDE_SCHRITTE = [
     skript: [
       {
         label: "Variante 1 – Familie / Freunde",
-        text: "„Wenn Sie kurz überlegen – gibt es jemanden in Ihrem Umfeld, der gerade ähnliche Fragen hat wie Sie heute? Jemanden, dem ich genauso helfen könnte?"",
+        text: '„Wenn Sie kurz überlegen – gibt es jemanden in Ihrem Umfeld, der gerade ähnliche Fragen hat wie Sie heute? Jemanden, dem ich genauso helfen könnte?"',
       },
       {
         label: "Variante 2 – Kollegen / Arbeit",
-        text: "„Viele meiner Kunden haben Kollegen oder Freunde, die sich ähnliche Sorgen machen – Absicherung, Altersvorsorge, Familie. Fällt Ihnen spontan jemand ein?"",
+        text: '„Viele meiner Kunden haben Kollegen oder Freunde, die sich ähnliche Sorgen machen – Absicherung, Altersvorsorge, Familie. Fällt Ihnen spontan jemand ein?"',
       },
       {
         label: "Variante 3 – Lebenssituation",
-        text: "„Sie haben mir erzählt, dass Ihr Bruder / Ihre Freundin auch gerade [Situation] hat. Glauben Sie, dass er/sie von so einem Gespräch profitieren könnte?"",
+        text: '„Sie haben mir erzählt, dass Ihr Bruder / Ihre Freundin auch gerade [Situation] hat. Glauben Sie, dass er/sie von so einem Gespräch profitieren könnte?"',
       },
     ],
   },
@@ -112,16 +112,16 @@ const GUIDE_SCHRITTE = [
     ],
     einwaende: [
       {
-        einwand: "„Ich möchte niemanden aufdrängen."",
-        antwort: "„Völlig verständlich – das würde ich auch nie tun. Ich kontaktiere die Person nur, wenn sie selbst Interesse hat. Sie entscheidet. Ich melde mich nur kurz vor – ganz unverbindlich."",
+        einwand: '„Ich möchte niemanden aufdrängen."',
+        antwort: '„Völlig verständlich – das würde ich auch nie tun. Ich kontaktiere die Person nur, wenn sie selbst Interesse hat. Sie entscheidet. Ich melde mich nur kurz vor – ganz unverbindlich."',
       },
       {
-        einwand: "„Mir fällt gerade niemand ein."",
-        antwort: "„Kein Problem. Darf ich Sie in 2–3 Tagen kurz erinnern? Oft fällt einem etwas ein, wenn man einen Moment darüber nachgedacht hat."",
+        einwand: '„Mir fällt gerade niemand ein."',
+        antwort: '„Kein Problem. Darf ich Sie in 2–3 Tagen kurz erinnern? Oft fällt einem etwas ein, wenn man einen Moment darüber nachgedacht hat."',
       },
       {
-        einwand: "„Ich frage mal nach, ob das okay ist."",
-        antwort: "„Super – das ist sehr rücksichtsvoll von Ihnen. Kann ich Ihnen kurz einen kleinen Text schicken, den Sie einfach weiterleiten können? So haben Sie und die Person alles auf einen Blick."",
+        einwand: '„Ich frage mal nach, ob das okay ist."',
+        antwort: '„Super – das ist sehr rücksichtsvoll von Ihnen. Kann ich Ihnen kurz einen kleinen Text schicken, den Sie einfach weiterleiten können? So haben Sie und die Person alles auf einen Blick."',
       },
     ],
     skript: null,
@@ -145,11 +145,11 @@ const GUIDE_SCHRITTE = [
     skript: [
       {
         label: "Daten abfragen",
-        text: "„Perfekt – wie heißt die Person? Und haben Sie eine Telefonnummer oder E-Mail von ihr, damit ich mich kurz vorstellen kann?"",
+        text: '„Perfekt – wie heißt die Person? Und haben Sie eine Telefonnummer oder E-Mail von ihr, damit ich mich kurz vorstellen kann?"',
       },
       {
         label: "Kontext erfragen",
-        text: "„Und damit ich gut vorbereitet bin: Was ist seine/ihre aktuelle Situation – arbeitet er/sie, hat er/sie Familie, gibt es etwas Wichtiges, das ich wissen sollte?"",
+        text: '„Und damit ich gut vorbereitet bin: Was ist seine/ihre aktuelle Situation – arbeitet er/sie, hat er/sie Familie, gibt es etwas Wichtiges, das ich wissen sollte?"',
       },
     ],
   },
@@ -168,7 +168,7 @@ const GUIDE_SCHRITTE = [
     skript: [
       {
         label: "Abschlusssatz",
-        text: "„Vielen herzlichen Dank – das bedeutet mir wirklich viel. Ich werde die Person mit dem gleichen Respekt behandeln, den Sie von mir erfahren haben."",
+        text: '„Vielen herzlichen Dank – das bedeutet mir wirklich viel. Ich werde die Person mit dem gleichen Respekt behandeln, den Sie von mir erfahren haben."',
       },
     ],
   },
