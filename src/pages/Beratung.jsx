@@ -48,47 +48,39 @@ export default function Beratung() {
   const [activeBeratungId, setActiveBeratungId] = useState(null);
   const [activeTab, setActiveTab] = useState("leitfaden");
   const [currentUser, setCurrentUser] = useState(null);
-  const [uplZugang, setUplZugang] = useState(null); // null=prüfen, true=erlaubt, false=gesperrt
+
   const queryClient = useQueryClient();
 
   useSavedTheme();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const hatUplParam = params.has("kontakt_id") || params.has("beratung_id") || params.has("upl_access");
-    const hatSessionFlag = sessionStorage.getItem("upl_access") === "1";
-
-    base44.auth.me().then((u) => {
-      setCurrentUser(u);
-
-      if (hatUplParam) {
-        sessionStorage.setItem("upl_access", "1");
-        setUplZugang(true);
-      } else if (hatSessionFlag) {
-        setUplZugang(true);
-      } else if (u?.role === "admin") {
-        setUplZugang(true);
-      } else {
-        setUplZugang(false);
-      }
-
-      // Deep-Link verarbeiten sobald User bekannt
-      const beratungId = params.get("beratung_id");
-      const kontaktId = params.get("kontakt_id");
-      const typ = params.get("typ") || "beratung1";
-      const name = params.get("name");
-
-      if (beratungId) {
-        setActiveBeratungId(beratungId);
-        setScreen("beratung");
-        setActiveTab("leitfaden");
-        window.history.replaceState({}, "", window.location.pathname);
-      } else if (kontaktId && name) {
-        handleStartBeratung(decodeURIComponent(name), null, kontaktId, typ);
-        window.history.replaceState({}, "", window.location.pathname);
-      }
-    });
+    base44.auth.me().then(setCurrentUser);
   }, []);
+
+  // Deep-Link: ?kontakt_id=xxx&typ=beratung1&name=Max+Muster
+  // or: ?beratung_id=xxx (open existing Beratung directly)
+  useEffect(() => {
+    if (!currentUser) return;
+    const params = new URLSearchParams(window.location.search);
+    const beratungId = params.get("beratung_id");
+    const kontaktId = params.get("kontakt_id");
+    const typ = params.get("typ") || "beratung1";
+    const name = params.get("name");
+
+    if (beratungId) {
+      // Open existing Beratung directly
+      setActiveBeratungId(beratungId);
+      setScreen("beratung");
+      setActiveTab("leitfaden");
+      // Clean URL
+      window.history.replaceState({}, "", window.location.pathname);
+    } else if (kontaktId && name) {
+      // Start new Beratung for this contact
+      handleStartBeratung(decodeURIComponent(name), null, kontaktId, typ);
+      // Clean URL
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, [currentUser]);
 
   const { data: beratungen = [] } = useQuery({
     queryKey: ["beratungen", currentUser?.email],
@@ -196,18 +188,6 @@ export default function Beratung() {
     setActiveBeratungId(null);
     setScreen("auswahl");
   };
-
-  // ── Zugangsprüfung ────────────────────────────────────────
-  if (uplZugang === null) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-background">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-primary rounded-full animate-spin" />
-      </div>
-    );
-  }
-  if (uplZugang === false) {
-    return <NurUplZugang />;
-  }
 
   // ── SCREEN: Gesprächsauswahl ──────────────────────────────
   if (screen === "auswahl") {
