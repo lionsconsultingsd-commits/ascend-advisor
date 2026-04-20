@@ -1,21 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, ArrowRight, Search, User, Phone, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Search, User, Phone, Loader2, RefreshCw } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
 export default function KontaktAuswahl({ gespraechstyp, onStart, onBack }) {
   const [name, setName] = useState("");
   const [kontakte, setKontakte] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [syncing, setSyncing] = useState(false);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    base44.functions.invoke("uplGetKontakte", {})
-      .then((res) => setKontakte(res.data?.kontakte || []))
-      .catch(() => setKontakte([]))
-      .finally(() => setLoading(false));
-  }, []);
+  const ladeKontakte = async () => {
+    setLoading(true);
+    try {
+      const user = await base44.auth.me();
+      const lokal = await base44.entities.Kontakt.filter({ berater_email: user.email }, "last_name", 200);
+      if (lokal && lokal.length > 0) {
+        setKontakte(lokal);
+      } else {
+        // Fallback: direkt aus UPL laden
+        const res = await base44.functions.invoke("uplGetKontakte", {});
+        setKontakte(res.data?.kontakte || []);
+      }
+    } catch {
+      setKontakte([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSync = async () => {
+    setSyncing(true);
+    try {
+      await base44.functions.invoke("syncUplKontakte", {});
+      await ladeKontakte();
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  useEffect(() => { ladeKontakte(); }, []);
 
   const filtered = kontakte.filter((k) => {
     const fullName = `${k.first_name || ""} ${k.last_name || ""}`.toLowerCase();
@@ -24,7 +49,9 @@ export default function KontaktAuswahl({ gespraechstyp, onStart, onBack }) {
 
   const handleSelectKontakt = (k) => {
     const displayName = `${k.first_name || ""} ${k.last_name || ""}`.trim();
-    onStart(displayName, null, k.id, gespraechstyp.id);
+    // Lokale Kontakte haben upl_kontakt_id, direkte UPL-Kontakte haben id
+    const uplId = k.upl_kontakt_id || k.id;
+    onStart(displayName, null, uplId, gespraechstyp.id);
   };
 
   const handleManualStart = () => {
@@ -53,7 +80,18 @@ export default function KontaktAuswahl({ gespraechstyp, onStart, onBack }) {
       <div className="space-y-4 flex-1">
         {/* UPL Kontakte */}
         <div className="bg-card rounded-2xl p-5 border shadow-sm space-y-3">
-          <h2 className="font-semibold text-sm">Kontakt aus UPL wählen</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold text-sm">Kontakt aus UPL wählen</h2>
+            <button
+              onClick={handleSync}
+              disabled={syncing}
+              className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
+              title="Kontakte jetzt synchronisieren"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${syncing ? "animate-spin" : ""}`} />
+              {syncing ? "Sync..." : "Sync"}
+            </button>
+          </div>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input

@@ -1,0 +1,52 @@
+{
+  "name": "Kontakt",
+  "type": "object",
+  "properties": {
+    "upl_kontakt_id": {
+      "type": "string",
+      "description": "ID des Kontakts im UPL-System"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "Vorname des Kontakts"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Nachname des Kontakts"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Telefonnummer des Kontakts"
+    },
+    "email": {
+      "type": "string",
+      "description": "E-Mail-Adresse des Kontakts"
+    },
+    "status": {
+      "type": "string",
+      "description": "Aktueller Status des Kontakts in UPL"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notizen zum Kontakt aus UPL"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags aus UPL"
+    },
+    "berater_email": {
+      "type": "string",
+      "description": "E-Mail des Beraters (created_by)"
+    },
+    "last_synced": {
+      "type": "string",
+      "description": "Zeitstempel der letzten Synchronisierung"
+    }
+  },
+  "required": [
+    "upl_kontakt_id"
+  ]
+}
