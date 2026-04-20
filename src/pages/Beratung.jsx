@@ -21,6 +21,7 @@ import ZieleGuide from "@/components/beratung/ZieleGuide";
 import VersorgungslueckenGuide from "@/components/beratung/VersorgungslueckenGuide";
 import WorstCaseGuide from "@/components/beratung/WorstCaseGuide";
 import ProduktPraesentationGuide from "@/components/beratung/ProduktPraesentationGuide";
+import EmpfehlungPanel from "@/components/beratung/EmpfehlungPanel";
 import KundenInfoBanner from "@/components/beratung/KundenInfoBanner";
 import ComplianceWarning, { COMPLIANCE_FRAGEN } from "@/components/beratung/ComplianceWarning";
 import UplStatusSync from "@/components/beratung/UplStatusSync";
@@ -396,6 +397,16 @@ export default function Beratung() {
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Ziele-Guide</p>
                   </div>
                   <ZieleGuide />
+                </>
+              ) : isAbschluss && aktuellePhase === 3 ? (
+                /* Abschlussgespräch Phase 3 = Empfehlungsnahme */
+                <>
+                  <div className="px-3 pt-2 pb-1">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Empfehlungsnahme</p>
+                  </div>
+                  <div className="flex-1 overflow-y-auto px-4 pb-4">
+                    <EmpfehlungPanel beratung={activeBeratung} />
+                  </div>
                 </>
               ) : (
                 <>

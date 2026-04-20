@@ -1,0 +1,49 @@
+{
+  "name": "Empfehlung",
+  "type": "object",
+  "properties": {
+    "beratung_id": {
+      "type": "string",
+      "description": "ID der Beratung, aus der die Empfehlung entstanden ist"
+    },
+    "empfehler_name": {
+      "type": "string",
+      "description": "Name des Kunden, der empfohlen hat"
+    },
+    "empfohlene_person_name": {
+      "type": "string",
+      "description": "Name der empfohlenen Person"
+    },
+    "empfohlene_person_telefon": {
+      "type": "string",
+      "description": "Telefonnummer der empfohlenen Person"
+    },
+    "empfohlene_person_email": {
+      "type": "string",
+      "description": "E-Mail der empfohlenen Person"
+    },
+    "notiz": {
+      "type": "string",
+      "description": "Kurze Notiz zum Kontext der Empfehlung"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "offen",
+        "kontaktiert",
+        "terminiert",
+        "abgeschlossen"
+      ],
+      "default": "offen",
+      "description": "Status der Empfehlung"
+    },
+    "berater_email": {
+      "type": "string",
+      "description": "E-Mail des Beraters"
+    }
+  },
+  "required": [
+    "empfehler_name",
+    "empfohlene_person_name"
+  ]
+}
