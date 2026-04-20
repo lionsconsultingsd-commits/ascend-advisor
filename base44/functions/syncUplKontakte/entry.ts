@@ -6,19 +6,11 @@ Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
 
-    // Unterstützt sowohl manuellen Aufruf (mit User) als auch Automatisierung (ohne User)
-    let beraterEmails = [];
     const user = await base44.auth.me().catch(() => null);
-
-    if (user) {
-      // Manueller Aufruf: nur den aktuellen Berater synchronisieren
-      beraterEmails = [user.email];
-    } else {
-      // Automatisierung: alle Berater aus vorhandenen Kontakten ermitteln
-      // Alternativ: alle User mit Rolle "admin" oder "user" aus der User-Entität
-      const alleUser = await base44.asServiceRole.entities.User.list();
-      beraterEmails = alleUser.map((u) => u.email).filter(Boolean);
+    if (!user) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    const beraterEmails = [user.email];
 
     const token = Deno.env.get("UPL_APP_SERVICE_TOKEN");
     const uplClient = createClient({ appId: UPL_APP_ID });

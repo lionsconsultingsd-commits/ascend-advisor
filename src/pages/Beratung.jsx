@@ -82,11 +82,8 @@ export default function Beratung() {
 
   const { data: beratungen = [] } = useQuery({
     queryKey: ["beratungen", currentUser?.email],
-    queryFn: () =>
-      currentUser
-        ? base44.entities.Beratung.filter({ created_by: currentUser.email }, "-created_date", 10)
-        : [],
-    enabled: !!currentUser,
+    queryFn: () => base44.entities.Beratung.filter({ created_by: currentUser.email }, "-created_date", 10),
+    enabled: !!currentUser?.email,
   });
 
   const activeBeratung = beratungen.find((b) => b.id === activeBeratungId);
