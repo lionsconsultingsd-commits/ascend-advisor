@@ -58,11 +58,11 @@ const GUIDE_SCHRITTE = [
     inhalt: [
       {
         typ: "erklaerung",
-        text: "Stelle niemals eine Ja/Nein-Frage wie „Kennen Sie jemanden?" – das lädt zum Nein ein. Stelle eine Nachdenkfrage, die den Kunden in seiner Welt abholt.",
+        text: 'Stelle niemals eine Ja/Nein-Frage wie \u201eKennen Sie jemanden?\u201c \u2013 das l\u00e4dt zum Nein ein. Stelle eine Nachdenkfrage, die den Kunden in seiner Welt abholt.',
       },
       {
         typ: "warnung",
-        text: "Nicht sagen: „Können Sie mich weiterempfehlen?" → wirkt bittend und schwach.",
+        text: 'Nicht sagen: \u201eK\u00f6nnen Sie mich weiterempfehlen?\u201c \u2192 wirkt bittend und schwach.',
       },
     ],
     skript: [
@@ -131,7 +131,7 @@ const GUIDE_SCHRITTE = [
     emoji: "📋",
     titel: "Daten sofort erfassen",
     kurz: "Erfassen",
-    beschreibung: "Sobald ein Name fällt – sofort notieren. Nicht „ich merk's mir".",
+        beschreibung: "Sobald ein Name f\u00e4llt \u2013 sofort notieren. Nicht einfach merken.",
     inhalt: [
       {
         typ: "erklaerung",
