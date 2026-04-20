@@ -1,13 +1,12 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Route, MessageCircle, Upload, Mic, PenLine } from "lucide-react";
+import { Route, MessageCircle, Mic, PenLine } from "lucide-react";
 
 const TABS = [
   { id: "leitfaden", label: "Leitfaden", icon: Route },
   { id: "einwaende", label: "Einwände", icon: MessageCircle },
   { id: "protokoll", label: "Protokoll", icon: Mic },
   { id: "unterschrift", label: "Unterschrift", icon: PenLine },
-  { id: "upl", label: "UPL", icon: Upload },
 ];
 
 export default function BottomNav({ activeTab, onTabChange }) {

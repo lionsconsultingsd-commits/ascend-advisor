@@ -22,13 +22,10 @@ import VersorgungslueckenGuide from "@/components/beratung/VersorgungslueckenGui
 import WorstCaseGuide from "@/components/beratung/WorstCaseGuide";
 import ProduktPraesentationGuide from "@/components/beratung/ProduktPraesentationGuide";
 import EmpfehlungGuide from "@/components/beratung/EmpfehlungGuide";
-import KundenInfoBanner from "@/components/beratung/KundenInfoBanner";
 import ComplianceWarning, { COMPLIANCE_FRAGEN } from "@/components/beratung/ComplianceWarning";
-import UplStatusSync from "@/components/beratung/UplStatusSync";
 import BeratungsfortschrittBadge from "@/components/beratung/BeratungsfortschrittBadge";
 import ThemeToggle from "@/components/ThemeToggle";
-import NurUplZugang from "@/pages/NurUplZugang";
-import { X, MoreVertical, CheckCircle, ExternalLink } from "lucide-react";
+import { X, MoreVertical, CheckCircle } from "lucide-react";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -57,30 +54,7 @@ export default function Beratung() {
     base44.auth.me().then(setCurrentUser);
   }, []);
 
-  // Deep-Link: ?kontakt_id=xxx&typ=beratung1&name=Max+Muster
-  // or: ?beratung_id=xxx (open existing Beratung directly)
-  useEffect(() => {
-    if (!currentUser) return;
-    const params = new URLSearchParams(window.location.search);
-    const beratungId = params.get("beratung_id");
-    const kontaktId = params.get("kontakt_id");
-    const typ = params.get("typ") || "beratung1";
-    const name = params.get("name");
 
-    if (beratungId) {
-      // Open existing Beratung directly
-      setActiveBeratungId(beratungId);
-      setScreen("beratung");
-      setActiveTab("leitfaden");
-      // Clean URL
-      window.history.replaceState({}, "", window.location.pathname);
-    } else if (kontaktId && name) {
-      // Start new Beratung for this contact
-      handleStartBeratung(decodeURIComponent(name), null, kontaktId, typ);
-      // Clean URL
-      window.history.replaceState({}, "", window.location.pathname);
-    }
-  }, [currentUser]);
 
   const { data: beratungen = [] } = useQuery({
     queryKey: ["beratungen", currentUser?.email],
@@ -110,21 +84,6 @@ export default function Beratung() {
     mutationFn: ({ id, data }) => base44.entities.Beratung.update(id, data),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["beratungen"] }),
   });
-
-  // Auto Pipeline-Update in UPL nach Abschluss
-  const autoPipelineUpdate = async (beratung) => {
-    if (!beratung?.upl_kontakt_id) return;
-    const typ = GESPRAECHSTYPEN.find((t) => t.id === beratung.gespraechstyp);
-    if (!typ?.upl_pipeline_ausgang) return;
-    try {
-      await base44.functions.invoke("uplUpdateKontakt", {
-        kontakt_id: beratung.upl_kontakt_id,
-        pipeline_status: typ.upl_pipeline_ausgang,
-      });
-    } catch (e) {
-      console.error("Pipeline-Update fehlgeschlagen:", e);
-    }
-  };
 
   const handleStartBeratung = (kundeName, existingId, uplKontaktId, typId) => {
     if (existingId) {
@@ -179,7 +138,6 @@ export default function Beratung() {
   const handleBeratungAbschliessen = async () => {
     await logAudit("Beratung abgeschlossen", "Beratung wurde als abgeschlossen markiert", "aktiv", "abgeschlossen");
     await updateMutation.mutateAsync({ id: activeBeratungId, data: { status: "abgeschlossen" } });
-    await autoPipelineUpdate({ ...activeBeratung, status: "abgeschlossen" });
     setActiveBeratungId(null);
     setScreen("auswahl");
   };
@@ -234,7 +192,6 @@ export default function Beratung() {
     einwaende: isCrossselling ? "Crossselling" : "Einwände",
     protokoll: "Protokoll",
     unterschrift: "Unterschrift",
-    upl: "UPL",
   };
 
   return (
@@ -298,7 +255,6 @@ export default function Beratung() {
         <div className="px-4 pt-3 pb-1">
           <h2 className="text-lg font-bold">
             {activeTab === "einwaende" && (isCrossselling ? "Crossselling Guide" : "Einwandbehandlung")}
-            {activeTab === "upl" && "UPL Sync"}
             {activeTab === "protokoll" && "KI-Protokoll"}
             {activeTab === "unterschrift" && "Unterschrift"}
           </h2>
@@ -309,8 +265,7 @@ export default function Beratung() {
       <div className="flex-1 overflow-hidden flex flex-col pt-2">
         {activeTab === "leitfaden" && (
           <div className="flex-1 overflow-hidden flex flex-col">
-            {/* Kundenbanner + Compliance */}
-            <KundenInfoBanner beratung={activeBeratung} />
+            {/* Compliance */}
             {aktuellePhase === 0 && (
               <ComplianceWarning
                 gespraechstyp={activeBeratung?.gespraechstyp}
@@ -423,22 +378,6 @@ export default function Beratung() {
           isCrossselling
             ? <CrosssellingGuide />
             : <EinwandPanel einwaende={einwaende} />
-        )}
-
-        {activeTab === "upl" && (
-          <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-4">
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-muted-foreground">Status in UPL direkt aktualisieren</p>
-              <UplStatusSync
-                beratung={activeBeratung}
-                onSynced={(status) => {
-                  handleUpdate({ upl_synced: true });
-                  logAudit("UPL Status-Update", `Status auf "${status}" gesetzt`, null, status);
-                }}
-              />
-            </div>
-            <UplPanel beratung={activeBeratung} onSyncStatusChange={(synced) => handleUpdate({ upl_synced: synced })} />
-          </div>
         )}
 
         {activeTab === "protokoll" && (
