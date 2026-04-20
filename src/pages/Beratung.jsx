@@ -387,7 +387,7 @@ export default function Beratung() {
                   <div className="px-3 pt-2 pb-1">
                     <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Präsentations-Guide</p>
                   </div>
-                  <ProduktPraesentationGuide />
+                  <ProduktPraesentationGuide beratung={activeBeratung} />
                 </>
               ) : isErstgespraech && aktuellePhase === 4 ? (
                 /* Erstgespräch Phase 4 = Ziele Guide */

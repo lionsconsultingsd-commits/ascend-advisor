@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ChevronRight, ChevronLeft, Lightbulb } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import ProduktEmpfehlung from "@/components/beratung/ProduktEmpfehlung";
 
 const SCHRITTE = [
   {
@@ -105,7 +106,7 @@ const SCHRITTE = [
   },
 ];
 
-export default function ProduktPraesentationGuide() {
+export default function ProduktPraesentationGuide({ beratung }) {
   const [selectedId, setSelectedId] = useState(null);
   const selected = SCHRITTE.find((s) => s.id === selectedId);
 
@@ -114,6 +115,9 @@ export default function ProduktPraesentationGuide() {
       <AnimatePresence mode="wait">
         {!selected ? (
           <motion.div key="list" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-2">
+            {/* KI-Produktempfehlung */}
+            <ProduktEmpfehlung beratung={beratung} />
+
             <p className="text-sm text-muted-foreground mb-3">
               Folge diesen 6 Schritten – in dieser Reihenfolge – um den Kunden von der Lösung zu überzeugen.
             </p>
