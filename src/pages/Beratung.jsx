@@ -27,6 +27,7 @@ import ComplianceWarning, { COMPLIANCE_FRAGEN } from "@/components/beratung/Comp
 import UplStatusSync from "@/components/beratung/UplStatusSync";
 import BeratungsfortschrittBadge from "@/components/beratung/BeratungsfortschrittBadge";
 import ThemeToggle from "@/components/ThemeToggle";
+import NurUplZugang from "@/pages/NurUplZugang";
 import { X, MoreVertical, CheckCircle, ExternalLink } from "lucide-react";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
@@ -47,11 +48,26 @@ export default function Beratung() {
   const [activeBeratungId, setActiveBeratungId] = useState(null);
   const [activeTab, setActiveTab] = useState("leitfaden");
   const [currentUser, setCurrentUser] = useState(null);
+  const [uplZugang, setUplZugang] = useState(null); // null=prüfen, true=erlaubt, false=gesperrt
   const queryClient = useQueryClient();
 
   useSavedTheme();
 
   useEffect(() => {
+    // Zugang nur erlauben wenn von UPL aus geöffnet (Deep-Link Parameter vorhanden)
+    const params = new URLSearchParams(window.location.search);
+    const hatUplParam = params.has("kontakt_id") || params.has("beratung_id") || params.has("upl_access");
+    const hatSessionFlag = sessionStorage.getItem("upl_access") === "1";
+
+    if (hatUplParam) {
+      sessionStorage.setItem("upl_access", "1");
+      setUplZugang(true);
+    } else if (hatSessionFlag) {
+      setUplZugang(true);
+    } else {
+      setUplZugang(false);
+    }
+
     base44.auth.me().then(setCurrentUser);
   }, []);
 
@@ -186,6 +202,18 @@ export default function Beratung() {
     setActiveBeratungId(null);
     setScreen("auswahl");
   };
+
+  // ── Zugangsprüfung ────────────────────────────────────────
+  if (uplZugang === null) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-primary rounded-full animate-spin" />
+      </div>
+    );
+  }
+  if (uplZugang === false) {
+    return <NurUplZugang />;
+  }
 
   // ── SCREEN: Gesprächsauswahl ──────────────────────────────
   if (screen === "auswahl") {
