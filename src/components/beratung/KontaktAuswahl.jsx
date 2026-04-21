@@ -1,22 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function KontaktAuswahl({ gespraechstyp, onStart, onBack }) {
   const [name, setName] = useState("");
-
-  useEffect(() => {
-    // URL-Parameter auslesen (von UPL Deep-Link)
-    const params = new URLSearchParams(window.location.search);
-    const kontaktName = params.get("kontakt_name") || params.get("kunde_name") || params.get("name");
-    const kontaktId = params.get("kontakt_id") || params.get("upl_kontakt_id");
-
-    if (kontaktName) {
-      // Direkt starten, kein Namenseingabe nötig
-      onStart(kontaktName.trim(), null, kontaktId || null, gespraechstyp.id);
-    }
-  }, []);
 
   const handleManualStart = () => {
     if (!name.trim()) return;

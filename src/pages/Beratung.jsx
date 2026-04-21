@@ -150,9 +150,22 @@ export default function Beratung() {
   // ── SCREEN: Gesprächsauswahl ──────────────────────────────
   if (screen === "auswahl") {
     const recentActive = beratungen.filter((b) => b.status === "aktiv").slice(0, 5);
+
+    const handleSelect = (typ) => {
+      const params = new URLSearchParams(window.location.search);
+      const kontaktName = params.get("kontakt_name") || params.get("kunde_name") || params.get("name");
+      const kontaktId = params.get("kontakt_id") || params.get("upl_kontakt_id");
+      if (kontaktName) {
+        handleStartBeratung(kontaktName.trim(), null, kontaktId || null, typ.id);
+      } else {
+        setSelectedTyp(typ);
+        setScreen("kontakt");
+      }
+    };
+
     return (
       <GespraechsAuswahl
-        onSelect={(typ) => { setSelectedTyp(typ); setScreen("kontakt"); }}
+        onSelect={handleSelect}
         onStartBeratung={handleStartBeratung}
         recentBeratungen={recentActive}
       />
